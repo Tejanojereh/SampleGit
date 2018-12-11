@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0B0A">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        app:srcCompat="@drawable/home_title"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="260dp"
+        android:layout_height="131dp"
+        android:layout_above="@+id/imageView6"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/date_container_home"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="76dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="260dp"
+        android:layout_height="131dp"
+        android:layout_above="@+id/imageView7"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/patient_container_home"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="217dp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="260dp"
+        android:layout_height="131dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp"
+        app:srcCompat="@drawable/appointment_container_home"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="348dp" />
+
+    <FrameLayout
+
+        android:id="@+id/menu"
+        android:layout_width="169dp"
+        android:layout_height="match_parent"></FrameLayout>
+</RelativeLayout>
