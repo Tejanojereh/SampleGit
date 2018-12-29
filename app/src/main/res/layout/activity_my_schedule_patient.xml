@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0A0B0A">
@@ -41,4 +42,15 @@
         android:layout_alignStart="@+id/txtdate"
         android:layout_marginBottom="13dp"
         app:srcCompat="@drawable/container_3" />
+
+    <TextView
+        android:id="@+id/appointment_date"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="195dp"
+        android:text="You have no upcoming appointments"
+        tools:textSize="22sp" />
+
 </RelativeLayout>
