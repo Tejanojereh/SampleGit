@@ -1,10 +1,24 @@
 package com.example.android.samplegit;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -50,5 +64,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgBtnSignIn.setOnClickListener(this);
     }
 
+    class WebService extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            HttpPost httpPost;
+            StringBuffer buffer = null;
+            HttpResponse response;
+            HttpClient httpClient;
+            InputStream inputStream;
+            final String message;
+
+            List<NameValuePair> nameValuePairs;
+            nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("username", txtUsername.getText().toString()));
+            nameValuePairs.add(new BasicNameValuePair("password", txtPassword.getText().toString()));
+
+            try {
+                httpClient = new DefaultHttpClient();
+                httpPost = new HttpPost("http://localhost/TBCareService/login.php");
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                response = httpClient.execute(httpPost);
+
+
+            }catch (Exception e) {
+
+            }
+
+            return null;
+        }
+    }
 
 }
