@@ -11,7 +11,7 @@ public class PatientInformationModule extends AppCompatActivity implements View.
     Button btnSubmit;
     EditText txtTBCaseNo, txtSputumExamNo;
     Spinner spinnerVisualAppearance, spinnerReading, spinnerDiagnosis;
-    ArrayAdapter <String> arrayAdapterVisualAppearance, arrayAdapterReading, arrayAdapterDiagnose;
+    ArrayAdapter <CharSequence> arrayAdapterVisualAppearance, arrayAdapterReading, arrayAdapterDiagnose;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,16 +41,16 @@ public class PatientInformationModule extends AppCompatActivity implements View.
         String[] Reading = {"0", "+n", "1+", "2+", "3+"};
         String[] Diagnosis = {"POSITIVE", "NEGATIVE"};
 
-        arrayAdapterVisualAppearance = new ArrayAdapter<String>(this, R.layout.activity_add_sputum_exam, VisualAppearance);
-        arrayAdapterVisualAppearance.setDropDownViewResource(R.layout.activity_add_sputum_exam);
+        arrayAdapterVisualAppearance = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, VisualAppearance);
+        arrayAdapterVisualAppearance.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerVisualAppearance.setAdapter(arrayAdapterVisualAppearance);
 
-        arrayAdapterReading = new ArrayAdapter<String>(this, R.layout.activity_add_sputum_exam, Reading);
-        arrayAdapterReading.setDropDownViewResource(R.layout.activity_add_sputum_exam);
+        arrayAdapterReading = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, Reading);
+        arrayAdapterReading.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerReading.setAdapter(arrayAdapterReading);
 
-        arrayAdapterDiagnose = new ArrayAdapter<String>(this, R.layout.activity_add_sputum_exam, Diagnosis);
-        arrayAdapterDiagnose.setDropDownViewResource(R.layout.activity_add_sputum_exam);
+        arrayAdapterDiagnose = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, Diagnosis);
+        arrayAdapterDiagnose.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerDiagnosis.setAdapter(arrayAdapterDiagnose);
     }
 }
