@@ -44,8 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //sign in
             case R.id.imageButton:
             {
-                Toast.makeText(this, "Sign In", Toast.LENGTH_SHORT).show();
-                //access db
+                progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
+                progressDialog.setCancelable(false);
+                new WebService().execute();
             }break;
 
             //forgot password
