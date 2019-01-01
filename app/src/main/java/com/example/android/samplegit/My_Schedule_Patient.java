@@ -17,12 +17,13 @@ import java.util.List;
 public class My_Schedule_Patient extends AppCompatActivity{
 
     TextView appt_date;
-
+    TextView med_date;
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointment_tbpartner);
         appt_date=findViewById(R.id.appointment_date);
+        med_date=findViewById(R.id.medicine_date);
 
 
 
