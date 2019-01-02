@@ -13,11 +13,13 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Calendar;
 
 public class My_Schedule_Patient extends AppCompatActivity{
 
     TextView appt_date;
     TextView med_date;
+    DatePicker currentTime;
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -25,6 +27,8 @@ public class My_Schedule_Patient extends AppCompatActivity{
         appt_date=findViewById(R.id.appointment_date);
         med_date=findViewById(R.id.medicine_date);
 
+
+      //  currentTime= Calendar.getInstance().getTime();
 
 
     }
