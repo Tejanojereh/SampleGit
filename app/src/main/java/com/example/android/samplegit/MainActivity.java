@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import org.apache.http.HttpConnection;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -15,6 +16,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MainActivity.this, PatientInformationModule.class);
         switch (v.getId())
         {
             //sign in
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageButton2:
             {
                 //redirect?? ko muna sa add sputum exam.. peace
+                Intent intent = new Intent(MainActivity.this, PatientInformationModule.class);
                 Toast.makeText(this, "Forgot Pword", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
 
@@ -70,10 +72,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgBtnSignIn.setOnClickListener(this);
     }
 
-    class WebService extends AsyncTask {
+    private class WebService extends AsyncTask {
 
         @Override
-        protected Object doInBackground(Object[] objects) {
+        protected Void doInBackground(Object... objects) {
             progressDialog.show();
             byte data[];
             HttpPost httpPost;
@@ -144,10 +146,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             }catch (Exception e) {
+               // Toast.makeText(MainActivity.this, "Error occured: daaaaaa " + e.getMessage(), Toast.LENGTH_LONG).show();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, "Error occured", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Error occured: daaaaaa ", Toast.LENGTH_LONG).show();
                     }
                 });
             }
