@@ -53,4 +53,26 @@
         android:text="You have no upcoming appointments"
         tools:textSize="22sp" />
 
+    <TextView
+        android:id="@+id/medicine_date"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="59dp"
+        android:text="Medicine"
+        tools:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="114dp"
+        android:text="Date today"
+        tools:textSize="22sp" />
+
 </RelativeLayout>
