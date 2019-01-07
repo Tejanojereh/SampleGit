@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-       //Intent intent = new Intent(MainActivity.this, PatientInformationModule.class);
-        Intent intent = new Intent(MainActivity.this, My_Schedule_Patient.class );
+       Intent intent = new Intent(MainActivity.this, PatientInformationModule.class);
+       // Intent intent = new Intent(MainActivity.this, My_Schedule_Patient.class );
         switch (v.getId())
         {
             //sign in
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 httpClient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/login.php/");
+                httpPost = new HttpPost("http://localhost/TBCareService/login.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 response = httpClient.execute(httpPost);

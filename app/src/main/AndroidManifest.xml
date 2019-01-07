@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.samplegit">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>s
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,8 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".PatientInformationModule"></activity>
-
-        <activity android:name=".My_Schedule_Patient"></activity>
     </application>
 
 </manifest>

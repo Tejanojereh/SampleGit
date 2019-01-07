@@ -9,35 +9,34 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:scaleType='centerCrop'
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
         app:srcCompat="@drawable/myschedule_title" />
 
     <ImageView
         android:id="@+id/txtdate"
-        android:layout_width="match_parent"
+        android:layout_width="265dp"
         android:layout_height="132dp"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="58dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="71dp"
         app:srcCompat="@drawable/containter_1" />
 
     <ImageView
         android:id="@+id/txtappt"
-        android:layout_width="match_parent"
+        android:layout_width="265dp"
         android:layout_height="132dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="178dp"
+        android:layout_alignStart="@+id/txtdate"
+        android:layout_marginBottom="158dp"
         app:srcCompat="@drawable/container_2" />
 
     <ImageView
         android:id="@+id/txtintake"
-        android:layout_width="match_parent"
+        android:layout_width="265dp"
         android:layout_height="132dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/txtdate"
@@ -46,39 +45,12 @@
 
     <TextView
         android:id="@+id/appointment_date"
-        android:layout_width="214dp"
+        android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="207dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="195dp"
         android:text="You have no upcoming appointments"
-        android:textAlignment="center"
-        tools:textSize="22sp"
-        android:textColor="@android:color/white"/>
-
-    <TextView
-        android:id="@+id/medicine_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="79dp"
-        android:text="Medicine Time"
-        android:textAlignment="center"
-        tools:textSize="22sp"
-        android:textColor="@android:color/white"/>
-    />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/medicine_date"
-        android:layout_marginTop="123dp"
-        android:text="DATE TODAY"
-        android:textSize="22sp"
-        android:textColor="@android:color/white"/>
-    />
+        tools:textSize="22sp" />
 
 </RelativeLayout>
