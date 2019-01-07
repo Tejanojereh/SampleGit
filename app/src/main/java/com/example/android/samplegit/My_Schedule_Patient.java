@@ -66,13 +66,12 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("P_ID",P_ID));
+            nameValuePairs.add(new BasicNameValuePair("P_ID","1"));
 
             try
             {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://localhost/retrieve_medication.php");
-
+                httpPost = new HttpPost("http://192.168.137.1/retrieve_medication.php/");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
                 inputStream=response.getEntity().getContent();
@@ -94,19 +93,7 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
                     @Override
                     public void run() {
-                      /*  try {
 
-                            WebSettings webSettings = wv.getSettings();
-                            wv.getSettings().setLoadWithOverviewMode(true);
-                            wv.getSettings().setUseWideViewPort(true);
-                            wv.getSettings().setBuiltInZoomControls(true);
-                            wv.getSettings().setPluginState(WebSettings.PluginState.ON);
-
-                            wv.setWebViewClient(new MyWebViewClient());
-                            wv.loadUrl(c.getString("M_Initial_Time"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
                         try {
                             med_date.setText(c.getString("M_Initial_Time"));
                         } catch (JSONException e) {
