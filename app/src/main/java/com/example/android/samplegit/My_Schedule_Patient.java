@@ -17,7 +17,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
@@ -47,11 +51,12 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
 
 
-        new WebService().execute();
+        new WebService_Medication().execute();
 
     }
 
-    class WebService extends AsyncTask
+
+    class WebService_Medication extends AsyncTask
     {
         @Override
         protected Void doInBackground(Object... objects)
@@ -66,12 +71,12 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("P_ID",P_ID));
+            nameValuePairs.add(new BasicNameValuePair("P_ID","1"));
 
             try
             {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://localhost/retrieve_medication.php");
+                httpPost = new HttpPost("http://192.168.137.1/retrieve_medication.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
@@ -79,7 +84,7 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
                 data= new byte[256];
                 buffer=new StringBuffer();
-                int len;
+                int len=0;
 
                 while(-1!=(len=inputStream.read(data))) {
                     buffer.append(new String(data, 0, len));
@@ -94,21 +99,10 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
                     @Override
                     public void run() {
-                      /*  try {
 
-                            WebSettings webSettings = wv.getSettings();
-                            wv.getSettings().setLoadWithOverviewMode(true);
-                            wv.getSettings().setUseWideViewPort(true);
-                            wv.getSettings().setBuiltInZoomControls(true);
-                            wv.getSettings().setPluginState(WebSettings.PluginState.ON);
 
-                            wv.setWebViewClient(new MyWebViewClient());
-                            wv.loadUrl(c.getString("M_Initial_Time"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
                         try {
-                            med_date.setText(c.getString("M_Initial_Time"));
+                            med_date.setText(c.getString("M_InitialTime").toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -119,7 +113,7 @@ public class My_Schedule_Patient extends AppCompatActivity{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(My_Schedule_Patient.this, "Error Occured", Toast.LENGTH_LONG).show();
+                        Toast.makeText(My_Schedule_Patient.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -148,4 +142,43 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
         }
     }
+
+    class WebSer extends AsyncTask<Void,Void,String>
+    {
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected  void onPostExecute (String s)
+        {
+            super.onPostExecute(s);
+            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids)
+        {
+            try
+            {
+                URL url= new URL("http://192.168.218.1/retrieve_medication.php");
+                HttpURLConnection con= (HttpURLConnection)url.openConnection();
+                StringBuilder sb=new StringBuilder();
+                BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String json;
+                while((json= bufferedReader.readLine())!=null)
+                {
+                    sb.append(json);
+                }
+                return sb.toString().trim();
+            }
+            catch (Exception e){
+                return null;
+            }
+        }
+    }
+
+
 }
