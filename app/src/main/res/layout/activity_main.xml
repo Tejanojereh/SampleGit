@@ -17,8 +17,7 @@
         android:layout_marginTop="-166dp"
         android:background="@drawable/textbox_login"
         android:ems="10"
-        android:inputType="textPassword"
-        android:text="password" />
+        android:inputType="textPassword" />
 
     <ImageView
         android:id="@+id/imageView"

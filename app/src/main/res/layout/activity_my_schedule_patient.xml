@@ -9,38 +9,42 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:textColor="@android:color/white"
+
         app:srcCompat="@drawable/myschedule_title" />
 
     <ImageView
         android:id="@+id/txtdate"
-        android:layout_width="265dp"
+        android:layout_width="fill_parent"
         android:layout_height="132dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="71dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp"
+        android:textColor="@android:color/white"
         app:srcCompat="@drawable/containter_1" />
 
     <ImageView
         android:id="@+id/txtappt"
-        android:layout_width="265dp"
+        android:layout_width="fill_parent"
         android:layout_height="132dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/txtdate"
         android:layout_marginBottom="158dp"
+        android:textColor="@android:color/white"
         app:srcCompat="@drawable/container_2" />
 
     <ImageView
         android:id="@+id/txtintake"
-        android:layout_width="265dp"
+        android:layout_width="fill_parent"
         android:layout_height="132dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/txtdate"
         android:layout_marginBottom="13dp"
+        android:textColor="@android:color/white"
         app:srcCompat="@drawable/container_3" />
 
     <TextView
@@ -48,10 +52,11 @@
         android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="195dp"
+        android:layout_alignStart="@+id/date"
+        android:layout_marginBottom="168dp"
+        android:textColor="@android:color/white"
         android:text="You have no upcoming appointments"
-        tools:textSize="22sp" />
+        tools:textSize="30sp" />
 
     <TextView
         android:id="@+id/medicine_date"
@@ -59,10 +64,11 @@
         android:layout_height="wrap_content"
 
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="59dp"
+        android:layout_alignStart="@+id/appointment_date"
+        android:layout_marginBottom="58dp"
+        android:textColor="@android:color/white"
         android:text="Medicine"
-        tools:textSize="22sp" />
+        tools:textSize="30sp" />
 
     <TextView
         android:id="@+id/date"
@@ -71,8 +77,10 @@
         android:layout_alignParentEnd="true"
 
         android:layout_alignParentTop="true"
-        android:layout_marginTop="114dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="130dp"
         android:text="Date today"
-        tools:textSize="22sp" />
+        android:textColor="@android:color/white"
+        tools:textSize="30sp" />
 
 </RelativeLayout>

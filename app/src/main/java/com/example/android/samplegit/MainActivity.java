@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 httpClient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://localhost/TBCareService/login.php");
+                httpPost = new HttpPost("http://192.168.137.1/login.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 response = httpClient.execute(httpPost);
@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 message = buffer.toString();
                 JSONObject jsonObj = new JSONObject(message);
-                org.json.JSONArray record = jsonObj.getJSONArray("returnResult");
-                inputStream.close();
+                org.json.JSONArray record = jsonObj.getJSONArray("results");
+             //   inputStream.close();
 
                 if(record.length() == 0) {
                     runOnUiThread(new Runnable() {
@@ -144,11 +144,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     });
                 }
 
-            }catch (Exception e) {
+            }catch (final Exception e) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, "Error occured", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }
