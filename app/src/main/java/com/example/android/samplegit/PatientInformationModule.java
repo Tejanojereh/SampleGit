@@ -125,7 +125,7 @@ public class PatientInformationModule extends AppCompatActivity implements View.
             String[] patientList;
             nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("TP_ID", "TP000001"));
-            httppost = new HttpPost("http://192.168.43.1/TBCareService/retrieveAssignedPatient.php");
+            httppost = new HttpPost("http://192.168.137.1/retrieveAssignedPatient.php");
             try {
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);
