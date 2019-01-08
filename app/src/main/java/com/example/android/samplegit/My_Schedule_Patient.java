@@ -50,7 +50,6 @@ public class My_Schedule_Patient extends AppCompatActivity{
         datenow.setText(currentTime.toString());
 
 
-
         new WebService_Medication().execute();
 
     }
@@ -102,7 +101,7 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
 
                         try {
-                            med_date.setText(c.getString("M_InitialTime").toString());
+                            med_date.setText("Medicine Intake Schedule:"+ c.getString("M_InitialTime").toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -143,42 +142,6 @@ public class My_Schedule_Patient extends AppCompatActivity{
         }
     }
 
-    class WebSer extends AsyncTask<Void,Void,String>
-    {
-        protected void onPreExecute()
-        {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected  void onPostExecute (String s)
-        {
-            super.onPostExecute(s);
-            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-
-        }
-
-        @Override
-        protected String doInBackground(Void... voids)
-        {
-            try
-            {
-                URL url= new URL("http://192.168.218.1/retrieve_medication.php");
-                HttpURLConnection con= (HttpURLConnection)url.openConnection();
-                StringBuilder sb=new StringBuilder();
-                BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String json;
-                while((json= bufferedReader.readLine())!=null)
-                {
-                    sb.append(json);
-                }
-                return sb.toString().trim();
-            }
-            catch (Exception e){
-                return null;
-            }
-        }
-    }
 
 
 }
