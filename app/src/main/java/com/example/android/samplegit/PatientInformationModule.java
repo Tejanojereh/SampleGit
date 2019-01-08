@@ -1,10 +1,13 @@
 package com.example.android.samplegit;
 
 import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.Formatter;
 import android.view.View;
 import android.widget.*;
 
@@ -30,8 +33,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class PatientInformationModule extends AppCompatActivity implements View.OnClickListener{
@@ -43,9 +51,11 @@ public class PatientInformationModule extends AppCompatActivity implements View.
 
     HttpClient httpclient; HttpResponse httpresponse; HttpPost httppost;
     StringBuffer stringbuffer = null; InputStream inputstream; BufferedReader bufferedreader;
-    List<NameValuePair> nameValuePairs;
+    List<NameValuePair> parameter;
 
-    private JSONArray result;
+//    WifiManager wm; WifiInfo wi; String ip;
+
+//    private JSONArray result;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,18 +65,47 @@ public class PatientInformationModule extends AppCompatActivity implements View.
         PopulateSpinner();
 
         btnSubmit.setOnClickListener(this);
+
+//        wm = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+//        WifiInfo wi = wm.getConnectionInfo();
+//        int ipAddress = wi.getIpAddress();
+//        String ip = String.format("%d.%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));
+//
+        Toast.makeText(this, getMobileIPAddress(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getWifiIPAddress(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View v) {
         //insert to DB
+        new ExecuteTask2(this).execute();
+    }
 
+    public static String getMobileIPAddress() {
+        try {
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface intf : interfaces) {
+                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
+                for (InetAddress addr : addrs) {
+                    if (!addr.isLoopbackAddress()) {
+                        return  addr.getHostAddress();
+                    }
+                }
+            }
+        } catch (Exception ex) {
+//            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT);
+        }
+        return "";
+    }
+    public String getWifiIPAddress() {
+        WifiManager wifiMgr = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
+        int ip = wifiInfo.getIpAddress();
+        return  Formatter.formatIpAddress(ip);
     }
 
     private void InstantiateControls(){
         btnSubmit = (Button)findViewById(R.id.BtnSubmit);
-//        txtTBCaseNo = (EditText)findViewById(R.id.TxtTBCaseNo);
-//        txtSputumExamNo = (EditText)findViewById(R.id.TxtSputumExamNo);
         spinnerVisualAppearance = (Spinner)findViewById(R.id.SpinnerVisualAppearance);
         spinnerReading = (Spinner)findViewById(R.id.SpinnerReading);
         spinnerDiagnosis = (Spinner)findViewById(R.id.SpinnerDiagnosis);
@@ -93,7 +132,7 @@ public class PatientInformationModule extends AppCompatActivity implements View.
         spinnerDiagnosis.setAdapter(arrayAdapterDiagnose);
 
         //TBPatient Spinner Populate
-        //new ExecuteTask(this).execute();
+        new ExecuteTask(this).execute();
     }
 
     //Alternative way to fetch data while webservice is not working
@@ -136,24 +175,41 @@ public class PatientInformationModule extends AppCompatActivity implements View.
         spinnerPatient.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, patient));
     }*/
 
-    public String[] ReadResponse() {
+    public String[] ReadResponse(String action) {
         try {
-            String line =""; String[] toReturn; int index = 0;
+            String line =""; String[] toReturn = null; int index = 0;
             inputstream = httpresponse.getEntity().getContent();
-            toReturn = new String[inputstream.available()]; //get the length. do it before reading the stream
+            //get the length. do it before reading the stream
+            toReturn = new String[inputstream.available()];
             bufferedreader = new BufferedReader(new InputStreamReader(inputstream));
-
-            if(bufferedreader.ready()) {
-                while ((line = bufferedreader.readLine()) != null) {
-                    toReturn[index] = line;
-                    index++;
-                }
-            }
-            else
+            switch(action)
             {
-                toReturn = new String[1];
-                toReturn[index] = "No Assigned Patient";
+                case "retrieve":
+                {
+                    if(bufferedreader.ready()) {
+                        while ((line = bufferedreader.readLine()) != null) {
+                            toReturn[index] = line;
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                        toReturn = new String[1];
+                        toReturn[index] = "No Assigned Patient";
+                    }
+                }break;
+
+                case "insert":
+                {
+                    if(bufferedreader.ready()) {
+                        while ((line = bufferedreader.readLine()) != null) {
+                            toReturn[index] = line;
+                            index++;
+                        }
+                    }
+                }break;
             }
+
 
             return toReturn;
 
@@ -174,19 +230,51 @@ public class PatientInformationModule extends AppCompatActivity implements View.
         @Override
         protected Object doInBackground(Object[] objects) {
             String[] patientList;
-            nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TP_ID", "TP000001"));
-            httppost = new HttpPost("http://localhost/TBCareService/retrieveAssignedPatient.php");
+            parameter = new ArrayList<NameValuePair>();
+            parameter.add(new BasicNameValuePair("TP_ID", "TP000001"));
+            httppost = new HttpPost("http://10.17.165.84/TBCareService/retrieveAssignedPatient.php");
+//            httppost = new HttpPost("http://"+ip+"/TBCareService/retrieveAssignedPatient.php");
             try {
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                httppost.setEntity(new UrlEncodedFormEntity(parameter));
                 httpresponse = httpclient.execute(httppost);
 
-                if ((patientList = ReadResponse()) != null) {
+                if ((patientList = ReadResponse("retrieve")) != null) {
                     arrayAdapterPatient = new ArrayAdapter<CharSequence>(context, android.R.layout.simple_spinner_item, patientList);
                     arrayAdapterPatient.setDropDownViewResource(android.R.layout.simple_spinner_item);
                     spinnerPatient.setAdapter(arrayAdapterPatient);
                 }
 
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    public class ExecuteTask2 extends AsyncTask{
+
+        private Context context;
+
+        public ExecuteTask2(Context con) {
+            context = con;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            parameter = new ArrayList<NameValuePair>();
+            parameter.add(new BasicNameValuePair("TBCaseNo", "TB000001"));
+            parameter.add(new BasicNameValuePair("SE_Result", spinnerVisualAppearance.toString() + " " + spinnerReading.toString() +" "+ spinnerDiagnosis.toString()));
+            parameter.add(new BasicNameValuePair("SE_Date", DateFormat.getDateTimeInstance().format(new Date())));
+            httppost = new HttpPost("http://10.17.165.84/TBCareService/insertSputumExam.php");
+//            httppost = new HttpPost("http://"+ip+"/TBCareService/insertSputumExam.php");
+            try {
+                httppost.setEntity(new UrlEncodedFormEntity(parameter));
+                httpresponse = httpclient.execute(httppost);
+                String[] message = ReadResponse("insert");
+                Toast.makeText(context, message.toString(), Toast.LENGTH_SHORT).show();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (IOException e) {
