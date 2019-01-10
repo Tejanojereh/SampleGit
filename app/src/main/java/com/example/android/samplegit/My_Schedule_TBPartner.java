@@ -41,7 +41,7 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointment_tbpartner);
 
-
+     new WebService_Populate().execute();
 
 
 
@@ -70,8 +70,9 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
 
                 httpclient= new DefaultHttpClient();
                 httpPost = new HttpPost("http://192.168.137.1/retrieve_appointment.php");
+
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                response= httpclient.execute(httpPost);
+                  response= httpclient.execute(httpPost);
                 inputStream= response.getEntity().getContent();
 
                 data= new byte[256];
@@ -91,9 +92,9 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
                 for(int i=0;i<record.length();i++)
                 {
                     JSONObject c= record.getJSONObject(i);
-                    webdata[i][0]=c.getString("app_id");
-                    webdata[i][1]=c.getString("tb_case_no");
-                    webdata[i][2]=c.getString("app_date");
+                    webdata[i][0]=c.getString("app_id").toString();
+                    webdata[i][1]=c.getString("tb_case_no").toString();
+                    webdata[i][2]=c.getString("app_date").toString();
 
 
 
