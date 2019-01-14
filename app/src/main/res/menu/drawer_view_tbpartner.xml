@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_account"
+        android:icon="@drawable/details"
+        android:title="My Account" />
+        <item
+            android:id="@+id/nav_appointment"
+            android:icon="@drawable/schedule"
+            android:title="My Appointment" />
+        <item
+            android:id="@+id/nav_patients"
+            android:icon="@drawable/patient"
+            android:title="My Patients" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/logout"
+            android:title="Log Out" />
+
+
+
+    </group>
+
+</menu>

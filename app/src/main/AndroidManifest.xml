@@ -23,6 +23,8 @@
         <activity android:name=".PatientInformationModule"></activity>
         <activity android:name=".My_Schedule_Patient"></activity>
         <activity android:name=".My_Schedule_TBPartner"></activity>
-    </application>
+        <activity android:name=".Menu_Patient">
+
+        </activity></application>
 
 </manifest>
