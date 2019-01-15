@@ -40,15 +40,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
      //  Intent intent = new Intent(MainActivity.this, PatientInformationModule.class);
    //     Intent intent = new Intent(MainActivity.this, My_Schedule_Patient.class );
-        Intent intent = new Intent(MainActivity.this, My_Schedule_TBPartner.class );
+        Intent intent = new Intent(MainActivity.this, My_Schedule_Patient.class );
      //   Intent intent= new Intent(MainActivity.this,Menu_Patient.class);
         switch (v.getId())
         {
             //sign in
             case R.id.imageButton:
             {
-                progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
-                progressDialog.setCancelable(false);
+               /* progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
+                progressDialog.setCancelable(false);*/
                 new WebService().execute();
             }break;
 
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            progressDialog.dismiss();
+                          //  progressDialog.dismiss();
                             Intent intent; //= new Intent(MainActivity.this, CollabMenuActivity.class);
                             if(uname.contains("TP"))
                             {
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             bundle.putString("id", id);
                             intent.putExtras(bundle);
                             startActivity(intent);
-                            finish();
+                           // finish();
                         }
                     });
                 }

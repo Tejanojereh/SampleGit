@@ -54,7 +54,7 @@ public class My_Schedule_Patient extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(My_Schedule_Patient.this, Note_Patient.class );
-                 
+                startActivity(intent);
 
             }
         });
