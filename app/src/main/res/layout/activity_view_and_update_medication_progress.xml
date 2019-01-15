@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TextView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:gravity="center_horizontal"
+            android:text="My Progress"
+            android:textAllCaps="true"
+            android:textSize="21sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView10"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="132dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--app:srcCompat="@drawable/containter_1" />-->
+
+        <TextView
+            android:id="@+id/TxtOverallProgress"
+            android:layout_width="fill_parent"
+            android:layout_height="132dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/containter_1"
+            android:text="TextView"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView11"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="132dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--app:srcCompat="@drawable/container_2" />-->
+
+        <TextView
+            android:id="@+id/TxtMedicationProgress"
+            android:layout_width="fill_parent"
+            android:layout_height="132dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/container_2"
+            android:text="TextView"
+            android:textSize="20sp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView12"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="132dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--app:srcCompat="@drawable/container_3" />-->
+
+        <TextView
+            android:id="@+id/TxtSputumResultAnalysis"
+            android:layout_width="fill_parent"
+            android:layout_height="132dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/container_3"
+            android:text="TextView"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+</RelativeLayout>

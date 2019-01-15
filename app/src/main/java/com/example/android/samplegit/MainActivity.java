@@ -16,7 +16,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-import org.json.JSONArray;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -36,17 +35,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         InstantiateControl();
     }
+
     @Override
     public void onClick(View v) {
-     //  Intent intent = new Intent(MainActivity.this, PatientInformationModule.class);
-        Intent intent = new Intent(MainActivity.this, My_Schedule_Patient.class );
+        Intent intent = new Intent(MainActivity.this, Add_Sputum_Exam.class);
+        //Intent intent = new Intent(MainActivity.this, My_Schedule_Patient.class );
         switch (v.getId())
         {
             //sign in
             case R.id.imageButton:
             {
-                progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
-                progressDialog.setCancelable(false);
+                //progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
+                //progressDialog.setCancelable(false);
                 new WebService().execute();
             }break;
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            progressDialog.show();
+            //progressDialog.show();
             byte data[];
             HttpPost httpPost;
             StringBuffer buffer = null;
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 httpClient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/login.php");
+                httpPost = new HttpPost("http://10.0.2.2/login.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 response = httpClient.execute(httpPost);
@@ -107,29 +107,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 message = buffer.toString();
                 JSONObject jsonObj = new JSONObject(message);
                 org.json.JSONArray record = jsonObj.getJSONArray("results");
-             //   inputStream.close();
+                //inputStream.close();
 
                 if(record.length() == 0) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
                             Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
                     JSONObject object = record.getJSONObject(0);
-                    id = object.getString("id");
+                    id = object.getString("ID");
                     uname = object.getString("username");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
                             Intent intent; //= new Intent(MainActivity.this, CollabMenuActivity.class);
                             if(uname.contains("TP"))
                             {
                                 //SAMPLE INTENT
-                                intent = new Intent(MainActivity.this, PatientInformationModule.class);
+                                intent = new Intent(MainActivity.this, Add_Sputum_Exam.class);
                             }
                             else{
                                 //SAMPLE INTENT

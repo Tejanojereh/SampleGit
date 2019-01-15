@@ -3,6 +3,7 @@ package com.example.android.samplegit;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,10 +23,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class PatientInformationModule extends AppCompatActivity implements View.OnClickListener{
+public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickListener{
 
     Button btnSubmit;
     //EditText txtTBCaseNo, txtSputumExamNo;
@@ -42,27 +45,24 @@ public class PatientInformationModule extends AppCompatActivity implements View.
         setContentView(R.layout.activity_add_sputum_exam);
         InstantiateControls();
         PopulateSpinner();
-
+        //new ExecuteTask(this).execute();
         btnSubmit.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         //insert to DB
-
+        new ExecuteTask2().execute();
     }
 
     private void InstantiateControls(){
         btnSubmit = (Button)findViewById(R.id.BtnSubmit);
-//        txtTBCaseNo = (EditText)findViewById(R.id.TxtTBCaseNo);
-//        txtSputumExamNo = (EditText)findViewById(R.id.TxtSputumExamNo);
         spinnerVisualAppearance = (Spinner)findViewById(R.id.SpinnerVisualAppearance);
         spinnerReading = (Spinner)findViewById(R.id.SpinnerReading);
         spinnerDiagnosis = (Spinner)findViewById(R.id.SpinnerDiagnosis);
         spinnerPatient = (Spinner)findViewById(R.id.SpinnerPatient);
 
-        httpclient = new DefaultHttpClient();
-
+        return;
     }
     private void PopulateSpinner() {
         String[] VisualAppearance = {"Muco-purulent", "Blood-Stained", "Salivary"};
@@ -83,8 +83,8 @@ public class PatientInformationModule extends AppCompatActivity implements View.
 
         //TBPatient Spinner Populate
         new ExecuteTask(this).execute();
+        return;
     }
-
     public String[] ReadResponse() {
         try {
             String line =""; String[] toReturn; int index = 0;
@@ -124,8 +124,8 @@ public class PatientInformationModule extends AppCompatActivity implements View.
         protected Object doInBackground(Object[] objects) {
             String[] patientList;
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TP_ID", "TP000001"));
-            httppost = new HttpPost("http://192.168.43.1/TBCareService/retrieveAssignedPatient.php");
+            nameValuePairs.add(new BasicNameValuePair("TP_ID", "TP10989"));
+            httppost = new HttpPost("http://10.0.2.2/retrieveAssignedPatient.php");
             try {
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);
@@ -135,10 +135,29 @@ public class PatientInformationModule extends AppCompatActivity implements View.
                     arrayAdapterPatient.setDropDownViewResource(android.R.layout.simple_spinner_item);
                     spinnerPatient.setAdapter(arrayAdapterPatient);
                 }
-
             }
             catch (UnsupportedEncodingException e) { e.printStackTrace(); }
             catch (IOException e) { e.printStackTrace(); }
+            return null;
+        }
+    }
+
+    public class ExecuteTask2 extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            String SE_Result = spinnerVisualAppearance.toString() + " " + spinnerReading.toString() +" "+ spinnerDiagnosis.toString();
+            nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("TBCaseNo", "TB10981"));
+            nameValuePairs.add(new BasicNameValuePair("SE_Result", SE_Result));
+            //nameValuePairs.add(new BasicNameValuePair("TSE_Date", DateFormat.getDateInstance(new Date())));
+            httppost = new HttpPost("http://10.0.2.2/insertSputumExam.php");
+            try{
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                //httpresponse =
+            }catch (Exception e) {
+
+            }
+
             return null;
         }
     }
