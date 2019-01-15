@@ -83,7 +83,7 @@
         tools:textSize="30sp" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/bttn_addnote"
         android:layout_width="187dp"
         android:layout_height="51dp"
         android:layout_alignParentBottom="true"
