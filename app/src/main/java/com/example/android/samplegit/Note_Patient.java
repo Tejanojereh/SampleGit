@@ -42,6 +42,7 @@ public class Note_Patient extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Note_Patient.this, My_Schedule_Patient.class );
+                new WebSer_Back().execute();
                 startActivity(intent);
 
             }
