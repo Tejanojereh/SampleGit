@@ -29,6 +29,7 @@ public class Note_Patient extends AppCompatActivity {
 
     EditText note;
     ImageButton back;
+    String s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,8 +90,14 @@ public class Note_Patient extends AppCompatActivity {
 
 
                 }
-                String s = buffer.toString();
+               s = buffer.toString();
                 inputStream.close();
+                runOnUiThread(new Runnable(){
+                    public void run() {
+                        Toast.makeText(Note_Patient.this, s, Toast.LENGTH_LONG).show();
+
+                    }
+                });
 
 
 
