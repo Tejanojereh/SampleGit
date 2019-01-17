@@ -42,14 +42,14 @@ public class Notify_Patient extends AppCompatActivity{
     Boolean linkCheck;
     String medication_date;
 
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    AlertDialog alertDialog = alertDialogBuilder.create();
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        AlertDialog alertDialog = alertDialogBuilder.create();
 
 
         new WebService_Medication().execute();
@@ -96,8 +96,8 @@ public class Notify_Patient extends AppCompatActivity{
                 JSONObject jsonObj= new JSONObject(s);
                 JSONArray record = jsonObj.getJSONArray("results");
                 final JSONObject c = record.getJSONObject(0);
-                SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss");
-                Date date=new Date();
+            //    SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss");
+            //    Date date=new Date();
 
                 runOnUiThread(new Runnable(){
 
@@ -108,7 +108,7 @@ public class Notify_Patient extends AppCompatActivity{
                         try {
 
                             medication_date= c.getString("M_InitialTime");
-
+                            alertDialog.setMessage(medication_date);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
