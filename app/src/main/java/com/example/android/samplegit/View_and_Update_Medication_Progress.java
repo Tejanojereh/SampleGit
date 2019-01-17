@@ -1,11 +1,13 @@
 package com.example.android.samplegit;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -37,7 +39,7 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_and_update_medication_progress);
         InstantiateControls();
-        new ExecuteTask().execute();
+        new ExecuteTask(this).execute();
     }
 
     @Override
@@ -52,6 +54,10 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
     }
 
     public class ExecuteTask extends AsyncTask{
+
+        Context context;
+        public ExecuteTask(Context con) {context=con;}
+
         @Override
         protected Object doInBackground(Object[] objects) {
             nameValuePairs = new ArrayList<NameValuePair>();
@@ -72,12 +78,12 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                 inputstream.close();
                 String s = stringbuffer.toString();
                 JSONObject jsonObj = new JSONObject(s);
-                JSONArray record = jsonObj.getJSONArray("results");
+                JSONArray record = jsonObj.getJSONArray("treatment_date");
                 ss = new String[record.length()];
                 for(int i = 0; i< record.length(); i++)
                 {
                     JSONObject c = record.getJSONObject(i);
-                    ss[i] = c.getString("Results");
+                    ss[i] = c.getString("results");
                 }
 
                 runOnUiThread(new Runnable() {
@@ -88,7 +94,7 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                 });
             }
             catch(Exception e) {
-
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
             return null;
         }

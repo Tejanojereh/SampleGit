@@ -26,6 +26,7 @@
         <activity android:name=".Menu_Patient"></activity>
         <activity android:name=".Note_Patient"></activity>
         <activity android:name=".Menu_TBPartner"></activity>
+        <activity android:name=".View_and_Update_Medication_Progress"></activity>
 
 
 
