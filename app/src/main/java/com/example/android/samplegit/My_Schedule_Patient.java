@@ -55,7 +55,7 @@ public class My_Schedule_Patient extends AppCompatActivity{
     }
 
 
-    class WebService_Medication extends AsyncTask
+  public  class WebService_Medication extends AsyncTask
     {
         @Override
         protected Void doInBackground(Object... objects)

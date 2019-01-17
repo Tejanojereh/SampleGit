@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if(uname.contains("TP"))
                             {
                                 //SAMPLE INTENT
-                                intent = new Intent(MainActivity.this, PatientInformationModule.class);
+                                intent = new Intent(MainActivity.this, Add_Sputum_Exam.class);
                             }
                             else{
                                 //SAMPLE INTENT
