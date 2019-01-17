@@ -19,6 +19,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -47,6 +50,7 @@ public class Notify_Patient extends AppCompatActivity{
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         AlertDialog alertDialog = alertDialogBuilder.create();
+
 
         new WebService_Medication().execute();
 
@@ -92,6 +96,9 @@ public class Notify_Patient extends AppCompatActivity{
                 JSONObject jsonObj= new JSONObject(s);
                 JSONArray record = jsonObj.getJSONArray("results");
                 final JSONObject c = record.getJSONObject(0);
+                SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss");
+                Date date=new Date();
+
                 runOnUiThread(new Runnable(){
 
                     @Override
