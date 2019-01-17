@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MainActivity.this, Add_Sputum_Exam.class);
+        Intent intent = new Intent(MainActivity.this, View_and_Update_Medication_Progress.class);
         //Intent intent = new Intent(MainActivity.this, My_Schedule_Patient.class );
         switch (v.getId())
         {
@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 //progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
                 //progressDialog.setCancelable(false);
-                new WebService().execute();
+                WebService web = new WebService();
+                web.execute();
             }break;
 
             //forgot password
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 httpClient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/login.php");
+                httpPost = new HttpPost("http://10.0.2.2/login.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 response = httpClient.execute(httpPost);
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if(uname.contains("TP"))
                             {
                                 //SAMPLE INTENT
-                                intent = new Intent(MainActivity.this, PatientInformationModule.class);
+                                intent = new Intent(MainActivity.this, Add_Sputum_Exam.class);
                             }
                             else{
                                 //SAMPLE INTENT
