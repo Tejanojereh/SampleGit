@@ -7,28 +7,43 @@
     android:background="@drawable/bg_login"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/txtPassword"
-        android:layout_width="163dp"
-        android:layout_height="wrap_content"
-
-        android:layout_alignStart="@+id/txtUsername"
-        android:layout_below="@+id/imageView3"
-        android:layout_marginTop="-166dp"
-        android:background="@drawable/textbox_login"
-        android:ems="10"
-        android:inputType="textPassword" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="263dp"
-        android:layout_height="224dp"
-        android:layout_alignBottom="@+id/imageView2"
-        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="107dp"
         app:srcCompat="@drawable/tbcare_title" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_below="@id/imageView"
+        android:layout_marginTop="223dp"
+        app:srcCompat="@drawable/sign_in_line" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="219dp" />
+
+
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -38,20 +53,21 @@
         app:srcCompat="@drawable/lbl_username" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageView3"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/imageView2"
-        android:layout_marginBottom="166dp"
+        android:layout_marginBottom="151dp"
         app:srcCompat="@drawable/lbl_password" />
 
     <EditText
         android:id="@+id/txtUsername"
         android:layout_width="161dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView"
-        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="26dp"
         android:background="@drawable/textbox_login"
         android:ems="10"
         android:inputType="none|textPersonName" />
@@ -64,6 +80,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="73dp"
         android:layout_marginEnd="50dp"
+        android:background="@null"
         app:srcCompat="@drawable/login_button" />
 
     <ImageButton
@@ -73,13 +90,20 @@
         android:layout_alignStart="@+id/imageButton"
         android:layout_below="@+id/imageButton"
         android:layout_marginTop="-73dp"
+        android:background="@android:color/transparent"
         app:srcCompat="@drawable/forgot_button" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="163dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        app:srcCompat="@drawable/sign_in_line" />
+
+        android:layout_alignStart="@+id/txtUsername"
+        android:layout_below="@+id/imageView3"
+        android:layout_marginTop="-166dp"
+        android:background="@drawable/textbox_login"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+
+
 </RelativeLayout>
