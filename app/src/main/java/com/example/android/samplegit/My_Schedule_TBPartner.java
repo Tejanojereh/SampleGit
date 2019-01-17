@@ -1,19 +1,12 @@
 package com.example.android.samplegit;
 
-import android.graphics.Color;
 import android.net.http.HttpResponseCache;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
-import android.widget.HorizontalScrollView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.HttpClientStack;
@@ -43,19 +36,10 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
     SimpleAdapter simpleAdapter;
     ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
     HashMap<String, String> items;
-
-    TableLayout mTableLayout;
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointment_tbpartner);
-            mTableLayout= (TableLayout) findViewById(R.id.table);
-        HorizontalScrollView hsv= new HorizontalScrollView(this);
-        hsv.addView(mTableLayout);
-
-
-
-
 
      new WebService_Populate().execute();
 
@@ -81,20 +65,8 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("ID","1"));
-            Handler mHandler;
+
             try {
-
-                runOnUiThread(new Runnable() {
-                                  @Override
-                                  public void run() {
-
-                                      Toast.makeText(My_Schedule_TBPartner.this, "Working!", Toast.LENGTH_LONG).show();
-
-                                  }
-                              });
-
-
-
 
                 httpclient= new DefaultHttpClient();
                 httpPost = new HttpPost("http://192.168.137.1/retrieve_appointment.php");
@@ -117,7 +89,6 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
                 JSONObject jsonObj= new JSONObject(s);
                 JSONArray record= jsonObj.getJSONArray("results");
                 webdata=new String[record.length()][3];
-                int rows=0;
                 for(int i=0;i<record.length();i++)
                 {
                     JSONObject c= record.getJSONObject(i);
@@ -125,10 +96,9 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
                     webdata[i][1]=c.getString("tb_case_no").toString();
                     webdata[i][2]=c.getString("app_date").toString();
 
-                    rows++;
+
 
                 }
-
                 for(int i = 0; i<record.length(); i++)
                 {
                     items = new HashMap<>();
@@ -136,10 +106,6 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
                     items.put("line2", webdata[i][1]);
                     items.put("line3", webdata[i][2]);
                     list.add(items);
-
-
-
-
                 }
 
                 runOnUiThread(new Runnable() {

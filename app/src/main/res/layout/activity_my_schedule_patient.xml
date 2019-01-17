@@ -82,14 +82,4 @@
         android:textColor="@android:color/white"
         tools:textSize="30sp" />
 
-    <ImageButton
-        android:id="@+id/bttn_addnote"
-        android:layout_width="187dp"
-        android:layout_height="51dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="14dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/addnotes" />
-
 </RelativeLayout>

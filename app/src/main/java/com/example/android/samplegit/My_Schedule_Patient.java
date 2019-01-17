@@ -1,12 +1,10 @@
 package com.example.android.samplegit;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.service.voice.VoiceInteractionService;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.*;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -39,34 +37,11 @@ public class My_Schedule_Patient extends AppCompatActivity{
     String P_ID="1";
     WebView wv;
     Boolean linkCheck;
-    ImageButton addnote;
-
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_schedule_patient);
-
-        //for addnotes button
-
-        addnote= (ImageButton) findViewById(R.id.bttn_addnote);
-        addnote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(My_Schedule_Patient.this, Note_Patient.class );
-                startActivity(intent);
-
-            }
-        });
-
-
-
-
-
-
-
-
-
         appt_date=findViewById(R.id.appointment_date);
         med_date=findViewById(R.id.medicine_date);
         datenow=findViewById(R.id.date);
@@ -80,7 +55,7 @@ public class My_Schedule_Patient extends AppCompatActivity{
     }
 
 
-    class WebService_Medication extends AsyncTask
+  public  class WebService_Medication extends AsyncTask
     {
         @Override
         protected Void doInBackground(Object... objects)
