@@ -45,10 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //sign in
             case R.id.imageButton:
             {
-                //progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
-                //progressDialog.setCancelable(false);
-                WebService web = new WebService();
-                web.execute();
+               /* progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
+                progressDialog.setCancelable(false);*/
+                new WebService().execute();
             }break;
 
             //forgot password
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 httpClient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://10.0.2.2/login.php");
+                httpPost = new HttpPost("http://192.168.137.1/login.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 response = httpClient.execute(httpPost);
@@ -125,12 +124,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //progressDialog.dismiss();
+                          //  progressDialog.dismiss();
                             Intent intent; //= new Intent(MainActivity.this, CollabMenuActivity.class);
                             if(uname.contains("TP"))
                             {
                                 //SAMPLE INTENT
-                                intent = new Intent(MainActivity.this, Add_Sputum_Exam.class);
+                                intent = new Intent(MainActivity.this, PatientInformationModule.class);
                             }
                             else{
                                 //SAMPLE INTENT
@@ -140,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             bundle.putString("id", id);
                             intent.putExtras(bundle);
                             startActivity(intent);
-                            finish();
+                           // finish();
                         }
                     });
                 }
