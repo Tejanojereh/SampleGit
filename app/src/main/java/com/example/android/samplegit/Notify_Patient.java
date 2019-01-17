@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.service.voice.VoiceInteractionService;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.*;
@@ -31,49 +32,21 @@ import java.util.Date;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-public class My_Schedule_Patient extends AppCompatActivity{
+public class Notify_Patient extends AppCompatActivity{
 
-    TextView appt_date;
-    TextView med_date;
-    TextView datenow;
+
     String P_ID="1";
-    WebView wv;
     Boolean linkCheck;
-    ImageButton addnote;
+    String medication_date;
 
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_schedule_patient);
-
-        //for addnotes button
-
-        addnote= (ImageButton) findViewById(R.id.bttn_addnote);
-        addnote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(My_Schedule_Patient.this, Note_Patient.class );
-                startActivity(intent);
-
-            }
-        });
 
 
-
-
-
-
-
-
-
-        appt_date=findViewById(R.id.appointment_date);
-        med_date=findViewById(R.id.medicine_date);
-        datenow=findViewById(R.id.date);
-
-        Date currentTime= Calendar.getInstance().getTime();
-        datenow.setText(currentTime.toString());
-
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
         new WebService_Medication().execute();
 
@@ -126,7 +99,10 @@ public class My_Schedule_Patient extends AppCompatActivity{
 
 
                         try {
-                            med_date.setText("Medicine Intake Schedule:"+ c.getString("M_InitialTime").toString());
+
+                            medication_date= c.getString("M_InitialTime");
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -137,35 +113,17 @@ public class My_Schedule_Patient extends AppCompatActivity{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(My_Schedule_Patient.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Notify_Patient.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }
             return null;
-            }
-
-
-
-        }
-    class MyWebViewClient extends WebViewClient{
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
         }
 
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-            view.loadUrl(url);
-            return true;
-        }
 
-        @Override
-        public void onPageFinished(WebView view, String url) {
-
-        }
     }
+
 
 
 
