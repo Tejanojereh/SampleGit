@@ -9,14 +9,13 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="325dp"
-        tools:layout_editor_absoluteY="114dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        />
-        <!--app:srcCompat="@drawable/note_title"-->
+        app:srcCompat="@drawable/note_title"
+        tools:layout_editor_absoluteX="325dp"
+        tools:layout_editor_absoluteY="114dp" />
 
     <EditText
         android:id="@+id/txt_note"
@@ -36,7 +35,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="13dp"
         android:layout_marginStart="12dp"
-        android:background="@android:color/transparent"/>
-        <!--app:srcCompat="@drawable/btn_back" />-->
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/btn_back" />
 
 </RelativeLayout>
