@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -96,8 +97,7 @@ public class Notify_Patient extends AppCompatActivity{
                 JSONObject jsonObj= new JSONObject(s);
                 JSONArray record = jsonObj.getJSONArray("results");
                 final JSONObject c = record.getJSONObject(0);
-            //    SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss");
-            //    Date date=new Date();
+                final Date currentTime= Calendar.getInstance().getTime();
 
                 runOnUiThread(new Runnable(){
 
@@ -108,7 +108,10 @@ public class Notify_Patient extends AppCompatActivity{
                         try {
 
                             medication_date= c.getString("M_InitialTime");
-                            alertDialog.setMessage(medication_date);
+
+                            if(currentTime.toString()== medication_date) {
+                                alertDialog.setMessage(medication_date);
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
