@@ -90,7 +90,7 @@ public class Account_TBPartner extends AppCompatActivity {
                                      JSONObject c = record.getJSONObject(0);
                                      fname.setText(c.getString("TP_Fname").toString());
                                      c = record.getJSONObject(1);
-                                     mname.setText(c.getString("TP_Mname").toString());
+                                     mname.setText("hi!");
                                      c = record.getJSONObject(2);
                                     lname.setText(c.getString("TP_Lname").toString());
                                      c = record.getJSONObject(3);
