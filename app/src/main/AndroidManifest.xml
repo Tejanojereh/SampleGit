@@ -27,6 +27,8 @@
         <activity android:name=".Note_Patient"></activity>
         <activity android:name=".Menu_TBPartner"></activity>
         <activity android:name=".View_and_Update_Medication_Progress"></activity>
+        <activity android:name=".ForgotPassword_tbpartner"></activity>
+        <activity android:name=".Account_TBPartner"></activity>
 
 
 
