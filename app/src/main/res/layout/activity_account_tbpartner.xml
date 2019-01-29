@@ -147,5 +147,12 @@
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/button_save" />
 
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_viewtb"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/drawer_view_tbpartner"/>
 
 </RelativeLayout>

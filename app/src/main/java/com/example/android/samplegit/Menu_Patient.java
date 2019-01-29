@@ -1,16 +1,49 @@
 package com.example.android.samplegit;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
-public class Menu_Patient extends AppCompatActivity
+public class Menu_Patient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
 
+    NavigationView navigationView;
+    Intent intent;
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_patient);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        menuItem.setChecked(true);
+
+        switch (menuItem.getItemId())
+        {
+
+            case R.id.nav_progress:
+                intent = new Intent(Menu_Patient.this, View_and_Update_Medication_Progress.class);
+                break;
+            case R.id.nav_schedule:
+                intent = new Intent(Menu_Patient.this, My_Schedule_Patient.class);
+                break;
+            case R.id.nav_log_out:
+                intent = new Intent(Menu_Patient.this, MainActivity.class);
+                break;
+
+
+
+        }
+        startActivity(intent);
+
+        return false;
+    }
 }
