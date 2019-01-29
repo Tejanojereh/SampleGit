@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MainActivity.this, View_and_Update_Medication_Progress.class);
-        //Intent intent = new Intent(MainActivity.this, My_Schedule_Patient.class );
+      //  Intent intent = new Intent(MainActivity.this, View_and_Update_Medication_Progress.class);
+        Intent intent = new Intent(MainActivity.this, Account_TBPartner.class );
         switch (v.getId())
         {
             //sign in
