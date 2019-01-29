@@ -13,7 +13,7 @@ public class NotifyDialog extends AppCompatDialogFragment {
 {
 //    return super.onCreateDialog(savedInstanceState);
     AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
-    builder.setTitle("Reminder:").setMessage("It's 11:10 AM! Have you taken your medicine?").setPositiveButton("yes", new DialogInterface.OnClickListener() {
+    builder.setTitle("Reminder:").setMessage("It's! Have you taken your medicine?").setPositiveButton("yes", new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
 
