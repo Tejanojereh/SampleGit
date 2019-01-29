@@ -89,4 +89,13 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/drawer_view"/>
 
+    <ImageButton
+        android:id="@+id/addnote"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtintake"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/addnotes"
+        android:background="@android:color/transparent"/>
+
 </RelativeLayout>

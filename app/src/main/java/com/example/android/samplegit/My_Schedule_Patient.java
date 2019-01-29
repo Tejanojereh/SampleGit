@@ -1,10 +1,12 @@
 package com.example.android.samplegit;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.service.voice.VoiceInteractionService;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.*;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -29,30 +31,41 @@ import java.util.Date;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-public class My_Schedule_Patient extends AppCompatActivity{
+public class My_Schedule_Patient extends AppCompatActivity {
 
     TextView appt_date;
     TextView med_date;
     TextView datenow;
-    String P_ID="1";
+    String P_ID = "1";
     WebView wv;
     Boolean linkCheck;
+    ImageButton addnote;
 
     @Override
-    protected  void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_schedule_patient);
-        appt_date=findViewById(R.id.appointment_date);
-        med_date=findViewById(R.id.medicine_date);
-        datenow=findViewById(R.id.date);
-
-        Date currentTime= Calendar.getInstance().getTime();
+        appt_date = findViewById(R.id.appointment_date);
+        med_date = findViewById(R.id.medicine_date);
+        datenow = findViewById(R.id.date);
+        addnote = findViewById(R.id.addnote);
+        Date currentTime = Calendar.getInstance().getTime();
         datenow.setText(currentTime.toString());
+        addnote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(My_Schedule_Patient.this, Note_Patient.class);
+                startActivity(intent);
+
+            }
+
+        });
 
 
         new WebService_Medication().execute();
 
     }
+
 
 
   public  class WebService_Medication extends AsyncTask
