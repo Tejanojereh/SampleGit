@@ -6,8 +6,8 @@
         android:title="My Account" />
         <!--android:icon="@drawable/details"-->
         <item
-            android:id="@+id/nav_appointment"
-            android:title="My Appointment" />
+            android:id="@+id/nav_add"
+            android:title="Add Sputum Exam" />
         <!--android:icon="@drawable/schedule"-->
         <item
             android:id="@+id/nav_patients"

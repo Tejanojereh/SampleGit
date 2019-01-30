@@ -81,5 +81,21 @@
         android:text="Date today"
         android:textColor="@android:color/white"
         tools:textSize="30sp" />
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/drawer_view"/>
+
+    <ImageButton
+        android:id="@+id/addnote"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtintake"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/addnotes"
+        android:background="@android:color/transparent"/>
 
 </RelativeLayout>

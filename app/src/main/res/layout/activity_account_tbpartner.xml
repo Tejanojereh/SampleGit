@@ -4,25 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0B0A">
+    android:background="#98f4da">
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
         app:srcCompat="@drawable/account_title" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        app:srcCompat="@drawable/acct" />
 
     <TextView
         android:id="@+id/a1"
@@ -44,7 +35,7 @@
         android:layout_marginEnd="19dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -138,7 +129,7 @@
         android:inputType="textPassword" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btnsave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -147,5 +138,12 @@
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/button_save" />
 
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_viewtb"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/drawer_view_tbpartner"/>
 
 </RelativeLayout>

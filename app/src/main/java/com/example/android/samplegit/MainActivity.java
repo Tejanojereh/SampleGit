@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            progressDialog.show();
+//            progressDialog.show();
             byte data[];
             HttpPost httpPost;
             StringBuffer buffer = null;
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            progressDialog.dismiss();
+                        //    progressDialog.dismiss();
                             Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
                         }
                     });
@@ -129,11 +129,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if(uname.contains("TP"))
                             {
                                 //SAMPLE INTENT
-                                intent = new Intent(MainActivity.this, Add_Sputum_Exam.class);
+                                intent = new Intent(MainActivity.this, Menu_TBPartner.class);
                             }
                             else{
                                 //SAMPLE INTENT
-                                intent = new Intent(MainActivity.this, My_Schedule_Patient.class);
+                                intent = new Intent(MainActivity.this, Menu_Patient.class);
                             }
                             Bundle bundle = new Bundle();
                             bundle.putString("id", id);

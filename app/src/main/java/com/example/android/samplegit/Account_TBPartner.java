@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class Account_TBPartner extends AppCompatActivity {
     EditText fname,lname,mname,contact;
+    ImageButton btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +33,12 @@ public class Account_TBPartner extends AppCompatActivity {
         lname=findViewById(R.id.lastname);
         mname=findViewById(R.id.middlename);
         contact=findViewById(R.id.contactnumber);
+        btn= findViewById(R.id.btnsave);
+
 
         new WebService_TBPartner().execute();
+
+
 
 
 
@@ -90,7 +96,7 @@ public class Account_TBPartner extends AppCompatActivity {
                                      JSONObject c = record.getJSONObject(0);
                                      fname.setText(c.getString("TP_Fname").toString());
                                      c = record.getJSONObject(1);
-                                     mname.setText("hi!");
+                                     mname.setText("TP_Mname!");
                                      c = record.getJSONObject(2);
                                     lname.setText(c.getString("TP_Lname").toString());
                                      c = record.getJSONObject(3);
