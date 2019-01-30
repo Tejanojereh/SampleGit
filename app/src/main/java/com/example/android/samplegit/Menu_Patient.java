@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -13,6 +15,9 @@ public class Menu_Patient extends AppCompatActivity implements NavigationView.On
 
     NavigationView navigationView;
     Intent intent;
+    DrawerLayout drawerLayout;
+    String id;
+    Bundle bundle1;
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,14 @@ public class Menu_Patient extends AppCompatActivity implements NavigationView.On
 
 
         }
+        Bundle bundle= new Bundle();
+
+        bundle1=getIntent().getExtras();
+        id= bundle.getString("id");
+
+        bundle.putString("id",id);
+        intent.putExtras(bundle);
+
         startActivity(intent);
 
         return false;
