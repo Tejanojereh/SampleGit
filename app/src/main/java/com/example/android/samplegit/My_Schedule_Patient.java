@@ -36,15 +36,18 @@ public class My_Schedule_Patient extends AppCompatActivity {
     TextView appt_date;
     TextView med_date;
     TextView datenow;
-    String P_ID = "1";
-    WebView wv;
-    Boolean linkCheck;
-    ImageButton addnote;
+    ImageButton addnote,back;
+    Bundle bundle;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_schedule_patient);
+
+
+
+
         appt_date = findViewById(R.id.appointment_date);
         med_date = findViewById(R.id.medicine_date);
         datenow = findViewById(R.id.date);
@@ -61,6 +64,16 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
         });
 
+      back=findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(My_Schedule_Patient.this,Menu_Patient.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         new WebService_Medication().execute();
 
@@ -73,6 +86,10 @@ public class My_Schedule_Patient extends AppCompatActivity {
         @Override
         protected Void doInBackground(Object... objects)
         {
+            //bundle
+            bundle=getIntent().getExtras();
+             id= bundle.getString("id");
+
             byte[] data;
             HttpPost httpPost;
             StringBuffer buffer;
@@ -114,7 +131,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
 
                         try {
-                            med_date.setText("Medicine Intake Schedule:"+ c.getString("M_InitialTime").toString());
+                            med_date.setText("Medicine Intake Schedule:"+ c.getString("Initial_Time").toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -135,25 +152,6 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
 
         }
-    class MyWebViewClient extends WebViewClient{
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
-        }
-
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-            view.loadUrl(url);
-            return true;
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-
-        }
-    }
 
 
 

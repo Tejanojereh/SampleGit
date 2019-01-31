@@ -68,11 +68,15 @@ public class Note_Patient extends AppCompatActivity {
             HttpClient httpclient;
             InputStream inputStream;
             final String message;
+            String id;
 
+            Bundle bundle= getIntent().getExtras();
+            id=bundle.getString("id");
             List<NameValuePair> nameValuePairs;
             nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("ID", "TB000001"));
+            nameValuePairs.add(new BasicNameValuePair("ID", id));
             nameValuePairs.add(new BasicNameValuePair("NOTES", note.getText().toString()));
+
             try {
                 httpclient = new DefaultHttpClient();
                 httpPost = new HttpPost("http://192.168.137.1/updatenotes.php");
@@ -84,10 +88,8 @@ public class Note_Patient extends AppCompatActivity {
                 data = new byte[256];
                 buffer = new StringBuffer();
                 int len = 0;
-
                 while (-1 != (len = inputStream.read(data))) {
                     buffer.append(new String(data, 0, len));
-
 
                 }
                s = buffer.toString();
