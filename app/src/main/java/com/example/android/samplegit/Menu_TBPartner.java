@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 public class Menu_TBPartner extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -40,6 +41,8 @@ public class Menu_TBPartner extends AppCompatActivity implements NavigationView.
 
 
         }
+        Menu nav_Menu = navigationView.getMenu();
+
         startActivity(intent);
 
         return false;

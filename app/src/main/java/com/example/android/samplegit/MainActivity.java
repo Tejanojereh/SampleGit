@@ -45,8 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //sign in
             case R.id.imageButton:
             {
-               /* progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "Loading, Please wait....", true, false);
-                progressDialog.setCancelable(false);*/
+
                 new WebService().execute();
             }break;
 
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageButton2:
             {
                 //redirect?? ko muna sa add sputum exam.. peace
-                Toast.makeText(this, "Forgot Pword", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Forgot Password", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
 
             }break;
@@ -120,26 +119,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     JSONObject object = record.getJSONObject(0);
                     id = object.getString("id");
+                     object = record.getJSONObject(1);
                     uname = object.getString("username");
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                          //  progressDialog.dismiss();
-                            Intent intent; //= new Intent(MainActivity.this, CollabMenuActivity.class);
-                            if(uname.contains("TP"))
-                            {
-                                //SAMPLE INTENT
-                                intent = new Intent(MainActivity.this, Menu_TBPartner.class);
-                            }
-                            else{
-                                //SAMPLE INTENT
+
+                            Intent intent;
+                            if(uname.contains("TP")) intent = new Intent(MainActivity.this, Menu_TBPartner.class);
+
+                            else {
                                 intent = new Intent(MainActivity.this, Menu_Patient.class);
                             }
                             Bundle bundle = new Bundle();
                             bundle.putString("id", id);
                             intent.putExtras(bundle);
                             startActivity(intent);
-                           // finish();
+
                         }
                     });
                 }
