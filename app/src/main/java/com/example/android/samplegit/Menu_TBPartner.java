@@ -49,9 +49,9 @@ public class Menu_TBPartner extends AppCompatActivity implements NavigationView.
         Bundle bundle= new Bundle();
 
         bundle=getIntent().getExtras();
-        id= bundle.getString("id");
+        //id= bundle.getString("id");
 
-        bundle.putString("id",id);
+        bundle.putString("id",bundle.getString("id"));
         intent.putExtras(bundle);
 
         startActivity(intent);

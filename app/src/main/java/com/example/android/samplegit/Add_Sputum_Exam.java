@@ -57,7 +57,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Add_Sputum_Exam.this, My_Schedule_Patient.class );
+                Intent intent = new Intent(Add_Sputum_Exam.this, MainActivity.class );
 
                 startActivity(intent);
 

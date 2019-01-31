@@ -39,12 +39,12 @@ public class Account_TBPartner extends AppCompatActivity {
         mname=findViewById(R.id.middlename);
         uname=findViewById(R.id.username);
         contact=findViewById(R.id.contactnumber);
-        btn= findViewById(R.id.btnsave);
+        //btn= findViewById(R.id.btnsave);
         back = (ImageButton) findViewById(R.id.btn_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Account_TBPartner.this, My_Schedule_Patient.class );
+                Intent intent = new Intent(Account_TBPartner.this, Menu_TBPartner.class );
 
                 startActivity(intent);
 
