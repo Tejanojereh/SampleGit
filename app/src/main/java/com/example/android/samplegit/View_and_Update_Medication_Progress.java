@@ -32,6 +32,10 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
     StringBuffer stringbuffer = null; InputStream inputstream; BufferedReader bufferedreader;
     List<NameValuePair> nameValuePairs;
 
+
+    //HI HI HI HI HI HI  HI
+
+
     String[] ss; byte[] data;
 
     @Override
