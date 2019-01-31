@@ -32,12 +32,14 @@ public class TreatmentDetails extends AppCompatActivity {
     List<NameValuePair> nameValuePairs;
 
     String[] ss; byte[] data;
+    Bundle bundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_treatment_details);
         InstantiateControl();
+        bundle = getIntent().getExtras();
     }
 
     public void InstantiateControl() {
@@ -46,6 +48,7 @@ public class TreatmentDetails extends AppCompatActivity {
         txtPartner = (TextView)findViewById(R.id.TxtTreatmentPartner);
     }
 
+    //retrieving medication
     public class ExecuteTask extends AsyncTask {
 
         Context context;
@@ -54,8 +57,8 @@ public class TreatmentDetails extends AppCompatActivity {
         @Override
         protected Object doInBackground(Object[] objects) {
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", "TB10981"));
-            httppost = new HttpPost("http://10.0.2.2/getPatient_OverallProgress.php");
+            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
+            httppost = new HttpPost("http://192.168.137.1/retrieve_medication.php");
             try{
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -71,7 +74,7 @@ public class TreatmentDetails extends AppCompatActivity {
                 inputstream.close();
                 String s = stringbuffer.toString();
                 JSONObject jsonObj = new JSONObject(s);
-                JSONArray record = jsonObj.getJSONArray("treatment_date");
+                JSONArray record = jsonObj.getJSONArray("Initial_Time");
                 ss = new String[record.length()];
                 for(int i = 0; i< record.length(); i++)
                 {
@@ -82,7 +85,55 @@ public class TreatmentDetails extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //txtOverallProgress.setText( Integer.parseInt(ss[0].toString()) - (30*6) + " days out of " + (30*6) + " days of treatment.");
+                        txtMedication.setText(ss[0].toString());
+                    }
+                });
+            }
+            catch(Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+            return null;
+        }
+    }
+
+    //retrieving patient details
+    public class ExecuteTask2 extends AsyncTask {
+
+        Context context;
+        public ExecuteTask2(Context con) {context=con;}
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
+            httppost = new HttpPost("http://192.168.137.1/getPartner.php");
+            try{
+                httpclient = new DefaultHttpClient();
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                httpresponse = httpclient.execute(httppost);
+
+                String[] toReturn = null; int len =0;
+                inputstream = httpresponse.getEntity().getContent();
+                data = new byte[256];
+                stringbuffer = new StringBuffer();
+                while (-1 != (len = inputstream.read(data))) {
+                    stringbuffer.append(new String(data, 0, len));
+                }
+                inputstream.close();
+                String s = stringbuffer.toString();
+                JSONObject jsonObj = new JSONObject(s);
+                JSONArray record = jsonObj.getJSONArray("partner_Name");
+                ss = new String[record.length()];
+                for(int i = 0; i< record.length(); i++)
+                {
+                    JSONObject c = record.getJSONObject(i);
+                    ss[i] = c.getString("results");
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtPartner.setText( ss[0].toString() );
                     }
                 });
             }

@@ -26,7 +26,7 @@
         android:text="First Name:"
         android:textSize="14sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/firstname"
         android:layout_width="181dp"
         android:layout_height="33dp"
@@ -46,7 +46,7 @@
         android:layout_marginTop="189dp"
         android:text="Middle Name:" />
 
-    <EditText
+    <TextView
         android:id="@+id/middlename"
         android:layout_width="181dp"
         android:layout_height="33dp"
@@ -64,7 +64,7 @@
         android:layout_marginTop="228dp"
         android:text="Last Name:" />
 
-    <EditText
+    <TextView
         android:id="@+id/lastname"
         android:layout_width="181dp"
         android:layout_height="33dp"
@@ -83,7 +83,7 @@
         android:layout_marginBottom="217dp"
         android:text="Contact Number:" />
 
-    <EditText
+    <TextView
         android:id="@+id/contactnumber"
         android:layout_width="181dp"
         android:layout_height="33dp"
@@ -101,7 +101,7 @@
         android:layout_marginBottom="149dp"
         android:text="Username:" />
 
-    <EditText
+    <TextView
         android:id="@+id/username"
         android:layout_width="181dp"
         android:layout_height="33dp"
@@ -110,40 +110,17 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
-    <TextView
-        android:id="@+id/pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/a1"
-        android:layout_marginBottom="106dp"
-        android:text="Password:" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="181dp"
-        android:layout_height="33dp"
-        android:layout_alignBottom="@+id/pass"
-        android:layout_alignStart="@+id/firstname"
-        android:ems="10"
-        android:inputType="textPassword" />
 
     <ImageButton
-        android:id="@+id/btnsave"
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
-        android:layout_toEndOf="@+id/textView5"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/button_save" />
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_viewtb"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_view_tbpartner"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/btn_back" />
+
+
 
 </RelativeLayout>

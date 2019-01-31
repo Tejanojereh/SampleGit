@@ -36,6 +36,9 @@ public class Note_Patient extends AppCompatActivity {
         setContentView(R.layout.activity_note);
         note = (EditText) findViewById(R.id.txt_note);
         back = (ImageButton) findViewById(R.id.btn_back);
+     /*   NotifyDialog dialog= new NotifyDialog();
+        dialog.show(getSupportFragmentManager(),"Medicine");
+*/
 
 
         //updates Patient_note table and returns to My Schedule view
@@ -47,6 +50,7 @@ public class Note_Patient extends AppCompatActivity {
                 startActivity(intent);
 
             }
+
         });
 
 

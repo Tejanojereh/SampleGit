@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 intent = new Intent(MainActivity.this, Menu_Patient.class);
                             }
                             Bundle bundle = new Bundle();
-                            bundle.putString("id", id);
+                            bundle.putString("id", uname);
                             intent.putExtras(bundle);
                             startActivity(intent);
 

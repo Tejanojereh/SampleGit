@@ -33,13 +33,17 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
     List<NameValuePair> nameValuePairs;
 
     String[] ss; byte[] data;
+    Bundle bundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_and_update_medication_progress);
         InstantiateControls();
+        bundle = getIntent().getExtras();
         new ExecuteTask(this).execute();
+        new ExecuteTask3(this).execute();
+        new ExecuteTask2(this).execute();
     }
 
     @Override
@@ -61,7 +65,7 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
         @Override
         protected Object doInBackground(Object[] objects) {
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", "TB10981"));
+            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
             httppost = new HttpPost("http://10.0.2.2/getPatient_OverallProgress.php");
             try{
                 httpclient = new DefaultHttpClient();
@@ -78,23 +82,142 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                 inputstream.close();
                 String s = stringbuffer.toString();
                 JSONObject jsonObj = new JSONObject(s);
-                JSONArray record = jsonObj.getJSONArray("treatment_date");
+                JSONArray record = jsonObj.getJSONArray("results");
                 ss = new String[record.length()];
                 for(int i = 0; i< record.length(); i++)
                 {
                     JSONObject c = record.getJSONObject(i);
-                    ss[i] = c.getString("results");
+                    ss[i] = c.getString("date");
                 }
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        txtOverallProgress.setText( Integer.parseInt(ss[0].toString()) - (30*6) + " days out of " + (30*6) + " days of treatment.");
+                        txtOverallProgress.setText( (30*6) - Integer.parseInt(ss[0].toString()) + " days out of " + (30*6) + " days of treatment.");
                     }
                 });
             }
-            catch(Exception e) {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            catch(final Exception e) {
+                    runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+            return null;
+        }
+    }
+
+    String Dtype, Idate, Ddate;
+    public class ExecuteTask2 extends AsyncTask{
+
+        Context context;
+        public ExecuteTask2(Context con) {context=con;}
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
+            httppost = new HttpPost("http://10.0.2.2/retrieve_medicationProgress.php");
+            try{
+                httpclient = new DefaultHttpClient();
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                httpresponse = httpclient.execute(httppost);
+
+                String[] toReturn = null; int len =0;
+                inputstream = httpresponse.getEntity().getContent();
+                data = new byte[256];
+                stringbuffer = new StringBuffer();
+                while (-1 != (len = inputstream.read(data))) {
+                    stringbuffer.append(new String(data, 0, len));
+                }
+                inputstream.close();
+                String s = stringbuffer.toString();
+                JSONObject jsonObj = new JSONObject(s);
+                JSONArray record = jsonObj.getJSONArray("results");
+                ss = new String[record.length()];
+//                for(int i = 0; i< record.length(); i++)
+//                {
+                JSONObject c = record.getJSONObject(0);
+                Dtype = c.getString("drug_type");
+                Idate = c.getString("Initial_time");
+                Ddate = c.getString("due_time");
+//                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] re = Eresult.split(" ");
+                        txtMedicationProgress.setText("Your medicine intake is "+ Dtype +" \nFirst Intake: "+ Idate +" \nSecond Intake: "+Ddate );
+                    }
+                });
+            }
+            catch(final Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+            return null;
+        }
+    }
+
+    String ID, EDate, Eresult;
+
+    //Displaying Sputum Examination Result
+    public class ExecuteTask3 extends AsyncTask{
+
+        Context context;
+        public ExecuteTask3(Context con) {context=con;}
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
+            httppost = new HttpPost("http://10.0.2.2/retrieve_SputumExamResult.php");
+            try{
+                httpclient = new DefaultHttpClient();
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                httpresponse = httpclient.execute(httppost);
+
+                String[] toReturn = null; int len =0;
+                inputstream = httpresponse.getEntity().getContent();
+                data = new byte[256];
+                stringbuffer = new StringBuffer();
+                while (-1 != (len = inputstream.read(data))) {
+                    stringbuffer.append(new String(data, 0, len));
+                }
+                inputstream.close();
+                String s = stringbuffer.toString();
+                JSONObject jsonObj = new JSONObject(s);
+                JSONArray record = jsonObj.getJSONArray("results");
+                ss = new String[record.length()];
+//                for(int i = 0; i< record.length(); i++)
+//                {
+                    JSONObject c = record.getJSONObject(0);
+                    ID = c.getString("ID");
+                    EDate = c.getString("Exam_date");
+                    Eresult = c.getString("Result");
+//                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] re = Eresult.split(" ");
+                        txtSputumResultAnalysis.setText("Date: "+ EDate +" \nAppereance: "+ re[0].toString() +" \nReading: "+re[1].toString()+" \nDiagnosis: "+re[2].toString() );
+                    }
+                });
+            }
+            catch(final Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
             return null;
         }

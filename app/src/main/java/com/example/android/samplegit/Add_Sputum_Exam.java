@@ -1,6 +1,7 @@
 package com.example.android.samplegit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -34,6 +35,7 @@ import java.util.List;
 public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickListener{
 
     Button btnSubmit;
+    ImageButton back;
     Spinner spinnerVisualAppearance, spinnerReading, spinnerDiagnosis, spinnerPatient;
     ArrayAdapter <CharSequence> arrayAdapterVisualAppearance, arrayAdapterReading, arrayAdapterDiagnose, arrayAdapterPatient;
 
@@ -51,9 +53,18 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
         PopulateSpinner();
 
         btnSubmit.setOnClickListener(this);
+        back = (ImageButton) findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Add_Sputum_Exam.this, MainActivity.class );
 
-//        Toast.makeText(this, spinnerVisualAppearance.getSelectedItem().toString() + " " + spinnerReading.getSelectedItem().toString() +" "+ spinnerDiagnosis.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
-//        Toast.makeText(this, DateFormat.getDateTimeInstance().format(new Date()).toString(), Toast.LENGTH_LONG).show();
+                startActivity(intent);
+
+            }
+
+        });
+
 
     }
 

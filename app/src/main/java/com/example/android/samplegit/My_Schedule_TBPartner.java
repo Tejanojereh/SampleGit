@@ -36,10 +36,14 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
     SimpleAdapter simpleAdapter;
     ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
     HashMap<String, String> items;
+    Bundle bundle;
+
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointment_tbpartner);
+
+        bundle = getIntent().getExtras();
 
      new WebService_Populate().execute();
 
@@ -64,7 +68,7 @@ public class My_Schedule_TBPartner extends AppCompatActivity {
             final InputStream inputStream;
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("ID","1"));
+            nameValuePairs.add(new BasicNameValuePair("TB_ID",bundle.getString("id")));
 
             try {
 
