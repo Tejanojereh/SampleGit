@@ -57,7 +57,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Add_Sputum_Exam.this, MainActivity.class );
+                Intent intent = new Intent(Add_Sputum_Exam.this, Menu_TBPartner.class );
 
                 startActivity(intent);
 
@@ -100,6 +100,8 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
         arrayAdapterDiagnose.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerDiagnosis.setAdapter(arrayAdapterDiagnose);
 
+
+
         //TBPatient Spinner Populate
         new ExecuteTask(this).execute();
         return;
@@ -130,28 +132,10 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
                         JSONObject c = record.getJSONObject(i);
                         toReturn[i] = c.getString("TBCaseNo");
                     }
-//                    if(bufferedreader.ready()) {
-//                        while ((line = bufferedreader.readLine()) != null) {
-//                            toReturn[index] = line;
-//                            index++;
-//                        }
-//                    }
-//                    else
-//                    {
-//                        toReturn = new String[1];
-//                        toReturn[index] = "No Assigned Patient";
-//                    }
                 } break;
 
                 case "insert": {
                     toReturn = new String[]{stringbuffer.toString()};
-//                    Toast.makeText(this, stringbuffer.toString(), Toast.LENGTH_SHORT).show();
-//                    if(bufferedreader.ready()) {
-//                        while ((line = bufferedreader.readLine()) != null) {
-//                            toReturn[index] = line;
-//                            index++;
-//                        }
-//                    }
                 }break;
             }
             return toReturn;
@@ -175,8 +159,9 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
 
         @Override
         protected Object doInBackground(Object[] objects) {
+            Bundle bundle=getIntent().getExtras();
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TP_ID", "TP10989"));
+            nameValuePairs.add(new BasicNameValuePair("TP_ID", bundle.getString("id")));
             httppost = new HttpPost("http://10.0.2.2/retrieveAssignedPatient.php");
             try {
                 httpclient = new DefaultHttpClient();
@@ -212,7 +197,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
         protected Object doInBackground(Object[] objects) {
             String SE_Result = spinnerVisualAppearance.getSelectedItem().toString() + " " + spinnerReading.getSelectedItem().toString() +" "+ spinnerDiagnosis.getSelectedItem().toString();
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TBCaseNo", "TB10981"));
+            nameValuePairs.add(new BasicNameValuePair("TBCaseNo", spinnerPatient.getSelectedItem().toString()));
             nameValuePairs.add(new BasicNameValuePair("SE_Result", SE_Result));
             nameValuePairs.add(new BasicNameValuePair("SE_Date", DateFormat.getDateTimeInstance().format(new Date()).toString()));
 
