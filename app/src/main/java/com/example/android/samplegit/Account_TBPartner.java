@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account_TBPartner extends AppCompatActivity {
-    EditText fname,lname,mname,contact,uname;
+    TextView fname,lname,mname,contact,uname;
     ImageButton btn,back;
     Bundle bundle;
 
