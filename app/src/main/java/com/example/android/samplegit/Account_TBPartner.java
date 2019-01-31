@@ -1,8 +1,10 @@
 package com.example.android.samplegit;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -24,7 +26,9 @@ import java.util.List;
 
 public class Account_TBPartner extends AppCompatActivity {
     EditText fname,lname,mname,contact;
-    ImageButton btn;
+    ImageButton btn,back;
+    Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,22 @@ public class Account_TBPartner extends AppCompatActivity {
         mname=findViewById(R.id.middlename);
         contact=findViewById(R.id.contactnumber);
         btn= findViewById(R.id.btnsave);
+        back = (ImageButton) findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Account_TBPartner.this, My_Schedule_Patient.class );
+
+                startActivity(intent);
+
+            }
+
+        });
+
+
+
+
+        bundle = getIntent().getExtras();
 
 
         new WebService_TBPartner().execute();
@@ -61,7 +81,7 @@ public class Account_TBPartner extends AppCompatActivity {
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("P_ID","TP000001"));
+            nameValuePairs.add(new BasicNameValuePair("P_ID",bundle.getString("id")));
 
             try
             {

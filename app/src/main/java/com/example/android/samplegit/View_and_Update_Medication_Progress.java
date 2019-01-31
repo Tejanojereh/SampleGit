@@ -33,12 +33,14 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
     List<NameValuePair> nameValuePairs;
 
     String[] ss; byte[] data;
+    Bundle bundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_and_update_medication_progress);
         InstantiateControls();
+        bundle = getIntent().getExtras();
         new ExecuteTask(this).execute();
         new ExecuteTask3(this).execute();
         new ExecuteTask2(this).execute();
@@ -63,7 +65,7 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
         @Override
         protected Object doInBackground(Object[] objects) {
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", "TB10981"));
+            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
             httppost = new HttpPost("http://10.0.2.2/getPatient_OverallProgress.php");
             try{
                 httpclient = new DefaultHttpClient();
@@ -116,7 +118,7 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
         @Override
         protected Object doInBackground(Object[] objects) {
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", "TB10981"));
+            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
             httppost = new HttpPost("http://10.0.2.2/retrieve_medicationProgress.php");
             try{
                 httpclient = new DefaultHttpClient();
@@ -174,7 +176,7 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
         @Override
         protected Object doInBackground(Object[] objects) {
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", "TB10981"));
+            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
             httppost = new HttpPost("http://10.0.2.2/retrieve_SputumExamResult.php");
             try{
                 httpclient = new DefaultHttpClient();

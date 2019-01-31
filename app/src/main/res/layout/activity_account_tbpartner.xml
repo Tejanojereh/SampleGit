@@ -138,12 +138,16 @@
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/button_save" />
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_viewtb"
+    <ImageButton
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_view_tbpartner"/>
+        android:layout_height="wrap_content"
+
+        android:layout_alignBottom="@+id/btnsave"
+        android:layout_alignStart="@+id/a1"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/btn_back" />
+
+
 
 </RelativeLayout>
