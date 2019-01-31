@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account_TBPartner extends AppCompatActivity {
-    EditText fname,lname,mname,contact;
+    EditText fname,lname,mname,contact,uname;
     ImageButton btn,back;
     Bundle bundle;
 
@@ -36,6 +36,7 @@ public class Account_TBPartner extends AppCompatActivity {
         fname=findViewById(R.id.firstname);
         lname=findViewById(R.id.lastname);
         mname=findViewById(R.id.middlename);
+        uname=findViewById(R.id.username);
         contact=findViewById(R.id.contactnumber);
         btn= findViewById(R.id.btnsave);
         back = (ImageButton) findViewById(R.id.btn_back);
@@ -83,6 +84,7 @@ public class Account_TBPartner extends AppCompatActivity {
             nameValuePairs= new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("P_ID",bundle.getString("id")));
 
+            uname.setText(bundle.getString("id"));
             try
             {
                 httpclient = new DefaultHttpClient();
