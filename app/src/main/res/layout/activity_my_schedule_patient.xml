@@ -14,93 +14,97 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:textColor="@android:color/white"
-
         app:srcCompat="@drawable/myschedule_title" />
 
-    <ImageView
-        android:id="@+id/txtdate"
-        android:layout_width="fill_parent"
-        android:layout_height="132dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="77dp"
+        android:orientation="vertical">
 
-        android:textColor="@android:color/white"
-        app:srcCompat="@drawable/container_2" />
+        <TextView
+            android:id="@+id/daa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:gravity="center_horizontal"
 
-    <ImageView
-        android:id="@+id/txtappt"
-        android:layout_width="fill_parent"
-        android:layout_height="132dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/txtdate"
-        android:layout_marginBottom="158dp"
-        android:textColor="@android:color/white"
-        android:layout_alignBottom="@+id/txtintake"
-        app:srcCompat="@drawable/container_2" />
+            android:textAllCaps="true"
+            android:textSize="21sp" />
 
-    <ImageView
-        android:id="@+id/txtintake"
-        android:layout_width="fill_parent"
-        android:layout_height="132dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/txtdate"
-        android:layout_marginBottom="13dp"
-        android:textColor="@android:color/white"
-        app:srcCompat="@drawable/container_3" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
 
-    <TextView
-        android:id="@+id/appointment_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/date"
-        android:layout_marginBottom="168dp"
-        android:textColor="@android:color/white"
-        android:text="You have no upcoming appointments"
-        tools:textSize="30sp" />
+        <!--<ImageView-->
+        <!--android:id="@+id/imageView10"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="132dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--app:srcCompat="@drawable/containter_1" />-->
 
-    <TextView
-        android:id="@+id/medicine_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="fill_parent"
+            android:layout_height="132dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/containter_1"
+            android:text="Date"
+            android:textSize="20sp" />
 
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/appointment_date"
-        android:layout_marginBottom="58dp"
-        android:textColor="@android:color/white"
-        android:text="Medicine"
-        tools:textSize="30sp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="127dp"
-        android:text="Date today"
-        android:textColor="@android:color/white"
-        tools:textSize="30sp" />
+        <TextView
+            android:id="@+id/medicine_date"
+            android:layout_width="fill_parent"
+            android:layout_height="132dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/container_2"
+            android:text="medicine date"
+            android:textSize="20sp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+
+        <TextView
+            android:id="@+id/appointment_date"
+            android:layout_width="fill_parent"
+            android:layout_height="132dp"
+            android:background="@drawable/container_3"
+            android:gravity="center"
+            android:text="Appointment Date"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
 
 
     <ImageButton
         android:id="@+id/addnote"
         android:layout_width="153dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/txtintake"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        app:srcCompat="@drawable/addnotes"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/addnotes" />
 
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/txtintake"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/btn_back" />
 

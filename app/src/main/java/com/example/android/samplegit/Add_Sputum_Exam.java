@@ -111,8 +111,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
 //            String line ="";
             String[] toReturn = null; int len =0;
             inputstream = httpresponse.getEntity().getContent();
-            //toReturn = new String[inputstream.available()]; //get the length. do it before reading the stream
-            //bufferedreader = new BufferedReader(new InputStreamReader(inputstream));
+
             data = new byte[256];
             stringbuffer = new StringBuffer();
             while (-1 != (len = inputstream.read(data))) {
