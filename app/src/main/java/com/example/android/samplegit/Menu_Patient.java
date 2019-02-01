@@ -50,7 +50,7 @@ public class Menu_Patient extends AppCompatActivity implements NavigationView.On
         Bundle bundle= new Bundle();
 
         bundle1=getIntent().getExtras();
-        id= bundle.getString("id");
+        id= bundle1.getString("id");
 
         bundle.putString("id",id);
         intent.putExtras(bundle);
