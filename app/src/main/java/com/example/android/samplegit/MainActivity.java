@@ -1,7 +1,10 @@
 package com.example.android.samplegit;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText txtUsername, txtPassword;
     ImageButton imgBtnSignIn, imgBtnForgotPassword;
     String id, uname;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //forgot password
             case R.id.imageButton2:
             {
-                //redirect?? ko muna sa add sputum exam.. peace
+
                 Toast.makeText(this, "Forgot Password", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
 
@@ -89,8 +91,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             nameValuePairs.add(new BasicNameValuePair("password", txtPassword.getText().toString()));
 
             try {
+
+
                 httpClient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/login.php");
+           // httpPost = new HttpPost("http://192.168.1.3/login.php");
+
+
+
+
+              httpPost = new HttpPost("http://192.168.1.4/login.php");
+
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 response = httpClient.execute(httpPost);
@@ -127,7 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void run() {
 
                             Intent intent;
-                            if(uname.contains("TP")) intent = new Intent(MainActivity.this, Menu_TBPartner.class);
+                            if(uname.contains("TP"))
+                                intent = new Intent(MainActivity.this, Menu_TBPartner.class);
 
                             else {
                                 intent = new Intent(MainActivity.this, Menu_Patient.class);

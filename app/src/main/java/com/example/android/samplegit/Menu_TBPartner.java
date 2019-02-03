@@ -13,7 +13,7 @@ public class Menu_TBPartner extends AppCompatActivity implements NavigationView.
 
     NavigationView navigationView;
     Intent intent;
-    Bundle bundle;
+    Bundle bundle,bundle1;
     String id;
 
     @Override
@@ -46,10 +46,10 @@ public class Menu_TBPartner extends AppCompatActivity implements NavigationView.
         }
 
 
-        Bundle bundle1= getIntent().getExtras();
-        String text=bundle1.getString("id");
+         bundle1= getIntent().getExtras();
 
-        bundle.putString("id",text);
+
+        bundle.putString("id",bundle1.getString("id"));
         intent.putExtras(bundle);
 
         startActivity(intent);

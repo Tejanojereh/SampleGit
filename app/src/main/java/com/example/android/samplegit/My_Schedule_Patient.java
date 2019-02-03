@@ -90,6 +90,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
             bundle=getIntent().getExtras();
              id= bundle.getString("id");
 
+
             byte[] data;
             HttpPost httpPost;
             StringBuffer buffer;
@@ -100,13 +101,13 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("P_ID",id));
+            nameValuePairs.add(new BasicNameValuePair("P_ID","'1'"));
 
             try
             {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/retrieve_medication.php");
-
+               // httpPost = new HttpPost("http://192.168.137.1/retrieve_medication.php");
+                httpPost = new HttpPost("http://192.168.1.4/retrieve_medication.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
                 inputStream=response.getEntity().getContent();
@@ -131,7 +132,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
 
                         try {
-                            med_date.setText("Medicine Intake Schedule:"+ c.getString("M_InitialTime").toString());
+                            med_date.setText("Medicine Intake Schedule:"+ c.getString("Initial_time"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
