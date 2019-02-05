@@ -27,12 +27,17 @@ public class Menu_TBPartner extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.activity_menu_tbpartner);
         navigationView = (NavigationView) findViewById(R.id.nav_viewtb);
         navigationView.setNavigationItemSelectedListener(this);
+
         bundle1=getIntent().getExtras();
         id= bundle1.getString("id");
+
+
         user=findViewById(R.id.user_id);
         View headerView = LayoutInflater.from(this).inflate(R.layout.nav_header, null);
         TextView userName = (TextView) headerView.findViewById(R.id.user_id);
         userName.setText(id);
+
+        navigationView.addHeaderView(headerView);
     }
 
     @Override

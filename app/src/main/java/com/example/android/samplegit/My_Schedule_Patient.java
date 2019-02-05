@@ -42,7 +42,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
     TextView med_date;
     TextView datenow;
     ImageButton addnote,back;
-    Bundle bundle;
+    Bundle bundle,bundle1;
     String id;
 
     @Override
@@ -81,7 +81,15 @@ public class My_Schedule_Patient extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(My_Schedule_Patient.this,Menu_Patient.class);
+
+                bundle1= getIntent().getExtras();
+
+                id= bundle1.getString("id");
+
+                bundle.putString("id",id);
+                intent.putExtras(bundle);
                 startActivity(intent);
+
 
             }
         });

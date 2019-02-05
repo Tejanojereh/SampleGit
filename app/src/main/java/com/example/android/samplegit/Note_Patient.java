@@ -29,7 +29,8 @@ public class Note_Patient extends AppCompatActivity {
 
     EditText note;
     ImageButton back;
-    String s;
+    String s,id;
+    Bundle bundle1,bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,12 @@ public class Note_Patient extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Note_Patient.this, My_Schedule_Patient.class );
                 new WebSer_Back().execute();
+                bundle1= getIntent().getExtras();
+
+                id= bundle1.getString("id");
+
+                bundle.putString("id",id);
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }

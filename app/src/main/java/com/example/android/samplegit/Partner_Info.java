@@ -1,8 +1,11 @@
 package com.example.android.samplegit;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,8 @@ public class Partner_Info extends AppCompatActivity {
     TextView tp_name,contact;
     String id;
     String name;
+    ImageButton back;
+    Bundle bundle,bundle1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,8 +40,26 @@ public class Partner_Info extends AppCompatActivity {
         setContentView(R.layout.activity_partner_info);
         tp_name= findViewById(R.id.tp_name);
         contact= findViewById(R.id.tp_contact);
+        back=findViewById(R.id.btn_back);
 
     new WebService_TBPartner().execute();
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Partner_Info.this, Menu_Patient.class );
+                bundle1= getIntent().getExtras();
+
+                id= bundle1.getString("id");
+
+                bundle.putString("id",id);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+
+        });
 
 
 
