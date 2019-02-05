@@ -24,6 +24,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
@@ -31,6 +33,9 @@ import java.util.Date;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.android.volley.toolbox.JsonObjectRequest;
+
 public class My_Schedule_Patient extends AppCompatActivity {
 
     TextView appt_date;
@@ -47,17 +52,24 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
 
 
-
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd ");
+        DateFormat datefor= new SimpleDateFormat("HH:mm");
+        Date date = new Date();
         appt_date = findViewById(R.id.appointment_date);
         med_date = findViewById(R.id.medicine_date);
         datenow = findViewById(R.id.date);
         addnote = findViewById(R.id.addnote);
-        Date currentTime = Calendar.getInstance().getTime();
-        datenow.setText(currentTime.toString());
+        datenow.setText(dateFormat.format(date)+ "\n"+ datefor.format(date));
+        bundle=getIntent().getExtras();
+        id= bundle.getString("id");
+
         addnote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(My_Schedule_Patient.this, Note_Patient.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -75,7 +87,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
         });
 
 
-        new WebService_Medication().execute();
+     new WebService_Medication().execute();
 
     }
 
@@ -101,12 +113,11 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("P_ID","1"));
+            nameValuePairs.add(new BasicNameValuePair("P_ID",id));
 
             try
             {
                 httpclient = new DefaultHttpClient();
-               // httpPost = new HttpPost("http://192.168.137.1/retrieve_medication.php");
                 httpPost = new HttpPost("http://192.168.1.4/retrieve_medication.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
@@ -124,7 +135,8 @@ public class My_Schedule_Patient extends AppCompatActivity {
                 String s= buffer.toString();
                 JSONObject jsonObj= new JSONObject(s);
                 JSONArray record = jsonObj.getJSONArray("results");
-                final JSONObject c = record.getJSONObject(0);
+             final   JSONObject c = record.getJSONObject(0);
+               final JSONObject c1 =record.getJSONObject(1);
                 runOnUiThread(new Runnable(){
 
                     @Override
@@ -132,7 +144,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
 
                 try {
-                            med_date.setText("Medicine Intake Schedule:"+ c.getString("Initial_time"));
+                            med_date.setText("Medicine Intake Schedule:\n"+ c.getString("Initial_time").toString()+"\n"+c1.getString("due_time"));
                         } catch (JSONException e) {
                     e.printStackTrace();
                 }

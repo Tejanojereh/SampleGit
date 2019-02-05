@@ -36,10 +36,6 @@ public class Note_Patient extends AppCompatActivity {
         setContentView(R.layout.activity_note);
         note = (EditText) findViewById(R.id.txt_note);
         back = (ImageButton) findViewById(R.id.btn_back);
-     /*   NotifyDialog dialog= new NotifyDialog();
-        dialog.show(getSupportFragmentManager(),"Medicine");
-*/
-
 
         //updates Patient_note table and returns to My Schedule view
         back.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +72,7 @@ public class Note_Patient extends AppCompatActivity {
 
             Bundle bundle= getIntent().getExtras();
             id=bundle.getString("id");
+
             List<NameValuePair> nameValuePairs;
             nameValuePairs = new ArrayList<NameValuePair>(2);
             nameValuePairs.add(new BasicNameValuePair("ID", id));
@@ -83,7 +80,7 @@ public class Note_Patient extends AppCompatActivity {
 
             try {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/updatenotes.php");
+                httpPost = new HttpPost("http://192.168.1.4/updatenotes.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response = httpclient.execute(httpPost);

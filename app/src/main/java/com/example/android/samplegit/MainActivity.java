@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-      //  Intent intent = new Intent(MainActivity.this, View_and_Update_Medication_Progress.class);
+
         Intent intent = new Intent(MainActivity.this, Account_TBPartner.class );
         switch (v.getId())
         {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 httpClient = new DefaultHttpClient();
-           // httpPost = new HttpPost("http://192.168.1.3/login.php");
+
 
 
 
