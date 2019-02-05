@@ -40,6 +40,9 @@ public class Menu_Patient extends AppCompatActivity implements NavigationView.On
             case R.id.nav_schedule:
                 intent = new Intent(Menu_Patient.this, My_Schedule_Patient.class);
                 break;
+            case R.id.nav_tp:
+                intent = new Intent(Menu_Patient.this, Partner_Info.class);
+                break;
             case R.id.nav_log_out:
                 intent = new Intent(Menu_Patient.this, MainActivity.class);
                 break;

@@ -89,7 +89,7 @@ public class Account_TBPartner extends AppCompatActivity {
             try
             {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/retrieve_tbinfo.php");
+                httpPost = new HttpPost("http://192.168.1.4/retrieve_tbinfo.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
