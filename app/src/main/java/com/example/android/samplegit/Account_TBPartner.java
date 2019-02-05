@@ -55,7 +55,7 @@ public class Account_TBPartner extends AppCompatActivity {
 
 
 
-        bundle = getIntent().getExtras();
+
 
 
         new WebService_TBPartner().execute();
@@ -83,13 +83,14 @@ public class Account_TBPartner extends AppCompatActivity {
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
+            bundle = getIntent().getExtras();
             nameValuePairs.add(new BasicNameValuePair("P_ID",bundle.getString("id")));
 
             uname.setText(bundle.getString("id"));
             try
             {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/retrieve_tbinfo.php");
+                httpPost = new HttpPost("http://192.168.1.4/retrieve_tbinfo.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
@@ -119,11 +120,12 @@ public class Account_TBPartner extends AppCompatActivity {
                                      JSONObject c = record.getJSONObject(0);
                                      fname.setText(c.getString("TP_Fname").toString());
                                      c = record.getJSONObject(1);
-                                     mname.setText("TP_Mname!");
+                                     mname.setText("TP_Mname");
                                      c = record.getJSONObject(2);
                                     lname.setText(c.getString("TP_Lname").toString());
                                      c = record.getJSONObject(3);
                                 contact.setText(c.getString("TP_ContactNo").toString());
+
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

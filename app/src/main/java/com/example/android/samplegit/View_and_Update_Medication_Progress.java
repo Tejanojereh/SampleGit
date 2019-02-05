@@ -1,11 +1,13 @@
 package com.example.android.samplegit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,16 +36,30 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
 
     String[] ss; byte[] data;
     Bundle bundle;
+    ImageButton back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_and_update_medication_progress);
         InstantiateControls();
-        bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();  back = (ImageButton) findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(View_and_Update_Medication_Progress.this, Menu_Patient.class );
+
+                startActivity(intent);
+
+            }
+
+        });
+
+
         new ExecuteTask(this).execute();
         new ExecuteTask3(this).execute();
         new ExecuteTask2(this).execute();
+
     }
 
     @Override

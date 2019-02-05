@@ -6,14 +6,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class Menu_TBPartner extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     NavigationView navigationView;
     Intent intent;
-    Bundle bundle;
+    TextView user;
+
+    Bundle bundle1;
     String id;
 
     @Override
@@ -22,6 +27,17 @@ public class Menu_TBPartner extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.activity_menu_tbpartner);
         navigationView = (NavigationView) findViewById(R.id.nav_viewtb);
         navigationView.setNavigationItemSelectedListener(this);
+
+        bundle1=getIntent().getExtras();
+        id= bundle1.getString("id");
+
+
+        user=findViewById(R.id.user_id);
+        View headerView = LayoutInflater.from(this).inflate(R.layout.nav_header, null);
+        TextView userName = (TextView) headerView.findViewById(R.id.user_id);
+        userName.setText(id);
+
+        navigationView.addHeaderView(headerView);
     }
 
     @Override
@@ -44,14 +60,13 @@ public class Menu_TBPartner extends AppCompatActivity implements NavigationView.
 
 
         }
-        Menu nav_Menu = navigationView.getMenu();
 
-        Bundle bundle= new Bundle();
+        Bundle bundle=new Bundle();
+         bundle1= getIntent().getExtras();
 
-        bundle=getIntent().getExtras();
-        //id= bundle.getString("id");
+        id= bundle1.getString("id");
 
-        bundle.putString("id",bundle.getString("id"));
+        bundle.putString("id",id);
         intent.putExtras(bundle);
 
         startActivity(intent);
