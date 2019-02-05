@@ -133,14 +133,16 @@ public class Note_Patient extends AppCompatActivity {
             HttpClient httpclient;
             InputStream inputStream;
             final String message;
+            Bundle bundle= getIntent().getExtras();
+
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("ID", "TB000001"));
+            nameValuePairs.add(new BasicNameValuePair("ID",   bundle.getString("id")));
 
             try {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/retrieve_notes.php");
+                httpPost = new HttpPost("http://192.168.1.4/retrieve_notes.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response = httpclient.execute(httpPost);
@@ -166,7 +168,7 @@ public class Note_Patient extends AppCompatActivity {
 
 
                         try {
-                           note.setText( c.getString("notes").toString());
+                           note.setText( c.getString("Notes").toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
