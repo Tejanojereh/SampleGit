@@ -101,7 +101,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs= new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("P_ID","'1'"));
+            nameValuePairs.add(new BasicNameValuePair("P_ID","1"));
 
             try
             {
@@ -131,11 +131,13 @@ public class My_Schedule_Patient extends AppCompatActivity {
                     public void run() {
 
 
-                        try {
+                try {
                             med_date.setText("Medicine Intake Schedule:"+ c.getString("Initial_time"));
                         } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    e.printStackTrace();
+                }
+
+
                     }
 
                 });
