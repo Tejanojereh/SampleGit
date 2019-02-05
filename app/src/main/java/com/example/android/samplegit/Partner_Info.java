@@ -24,8 +24,9 @@ import java.util.List;
 public class Partner_Info extends AppCompatActivity {
 
 
-    TextView tp_name;
+    TextView tp_name,contact;
     String id;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,7 +34,7 @@ public class Partner_Info extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_info);
         tp_name= findViewById(R.id.tp_name);
-
+        contact= findViewById(R.id.tp_contact);
 
     new WebService_TBPartner().execute();
 
@@ -54,11 +55,12 @@ public class Partner_Info extends AppCompatActivity {
             InputStream inputStream;
             final String message;
             Bundle bundle= getIntent().getExtras();
+
             id=bundle.getString("id");
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("P_ID", bundle.getString("id")));
+            nameValuePairs.add(new BasicNameValuePair("P_ID", id));
 
             try {
                 httpclient = new DefaultHttpClient();
@@ -88,7 +90,6 @@ public class Partner_Info extends AppCompatActivity {
 
 
                         try {
-                            String name;
                             JSONObject c = record.getJSONObject(0);
                             name=c.getString("TP_Fname")+" ";
                              c = record.getJSONObject(1);
@@ -96,9 +97,8 @@ public class Partner_Info extends AppCompatActivity {
                              c = record.getJSONObject(2);
                             name+=c.getString("TP_Lname")+" ";
                              c = record.getJSONObject(3);
-
                              tp_name.setText(name);
-
+                             contact.setText(c.getString("TP_ContactNo"));
 
 
 
