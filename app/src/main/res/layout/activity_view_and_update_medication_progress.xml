@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#0A0B0A">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,15 +12,12 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/TextView2"
-            android:layout_width="match_parent"
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
-            android:gravity="center_horizontal"
-            android:text="My Progress"
-            android:textAllCaps="true"
-            android:textSize="21sp" />
+            app:srcCompat="@drawable/home_title" />
 
         <Space
             android:layout_width="match_parent"
