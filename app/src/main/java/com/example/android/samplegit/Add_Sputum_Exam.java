@@ -58,9 +58,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Add_Sputum_Exam.this, Menu_TBPartner.class );
-
                 startActivity(intent);
-
             }
 
         });
@@ -86,7 +84,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
     private void PopulateSpinner() {
         String[] VisualAppearance = {"Muco-purulent", "Blood-Stained", "Salivary"};
         String[] Reading = {"0", "+n", "1+", "2+", "3+"};
-        String[] Diagnosis = {"POSITIVE", "NEGATIVE"};
+        String[] Diagnosis = {"NEGATIVE", "POSITIVE"};
 
         arrayAdapterVisualAppearance = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, VisualAppearance);
         arrayAdapterVisualAppearance.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -108,7 +106,6 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
     }
     public String[] ReadResponse(String action) {
         try {
-//            String line ="";
             String[] toReturn = null; int len =0;
             inputstream = httpresponse.getEntity().getContent();
 
@@ -161,7 +158,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
             Bundle bundle=getIntent().getExtras();
             nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("TP_ID", bundle.getString("id")));
-            httppost = new HttpPost("http://10.0.2.2/retrieveAssignedPatient.php");
+            httppost = new HttpPost("http://192.168.43.110/retrieveAssignedPatient.php");
             try {
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -202,7 +199,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
 
 
 
-            httppost = new HttpPost("http://10.0.2.2/insertSputumExam.php");
+            httppost = new HttpPost("http://192.168.43.110/insertSputumExam.php");
             try{
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);

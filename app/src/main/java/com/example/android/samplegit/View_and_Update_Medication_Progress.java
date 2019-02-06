@@ -34,7 +34,9 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
     StringBuffer stringbuffer = null; InputStream inputstream; BufferedReader bufferedreader;
     List<NameValuePair> nameValuePairs;
 
-    String[] ss; byte[] data;
+    String[] tempStorage;
+    String Dtype, Idate, Ddate, ID, EDate, Eresult="";
+    byte[] data;
     Bundle bundle;
     ImageButton back;
 
@@ -48,24 +50,22 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(View_and_Update_Medication_Progress.this, Menu_Patient.class );
-
                 startActivity(intent);
-
             }
 
         });
 
+        nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
 
         new ExecuteTask(this).execute();
-        new ExecuteTask3(this).execute();
         new ExecuteTask2(this).execute();
+        new ExecuteTask3(this).execute();
 
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
+    public void onClick(View v) { }
 
     public void InstantiateControls() {
         txtOverallProgress = (TextView)findViewById(R.id.TxtOverallProgress);
@@ -80,15 +80,16 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
-            httppost = new HttpPost("http://10.0.2.2/getPatient_OverallProgress.php");
             try{
+                int len =0;
+
+                //region Overall Progress
+                httppost = new HttpPost("http://192.168.43.110/getPatient_OverallProgress.php");
+
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);
 
-                String[] toReturn = null; int len =0;
                 inputstream = httpresponse.getEntity().getContent();
                 data = new byte[256];
                 stringbuffer = new StringBuffer();
@@ -96,20 +97,21 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                     stringbuffer.append(new String(data, 0, len));
                 }
                 inputstream.close();
-                String s = stringbuffer.toString();
-                JSONObject jsonObj = new JSONObject(s);
-                JSONArray record = jsonObj.getJSONArray("results");
-                ss = new String[record.length()];
-                for(int i = 0; i< record.length(); i++)
+                String overall = stringbuffer.toString();
+                JSONObject jsonObject_Overall = new JSONObject(overall);
+                JSONArray record_Overall = jsonObject_Overall.getJSONArray("results");
+                tempStorage = new String[record_Overall.length()];
+                for(int i = 0; i< record_Overall.length(); i++)
                 {
-                    JSONObject c = record.getJSONObject(i);
-                    ss[i] = c.getString("date");
+                    JSONObject c = record_Overall.getJSONObject(i);
+                    tempStorage[i] = c.getString("date");
                 }
+                //endregion
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        txtOverallProgress.setText( (30*6) - Integer.parseInt(ss[0].toString()) + " days out of " + (30*6) + " days of treatment.");
+                        txtOverallProgress.setText( (30*6) - Integer.parseInt(tempStorage[0].toString()) + " days out of " + (30*6) + " days of treatment.");
                     }
                 });
             }
@@ -125,7 +127,6 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
         }
     }
 
-    String Dtype, Idate, Ddate;
     public class ExecuteTask2 extends AsyncTask{
 
         Context context;
@@ -133,15 +134,15 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
-            httppost = new HttpPost("http://10.0.2.2/retrieve_medicationProgress.php");
             try{
+                //region Medication Progress
+                httppost = new HttpPost("http://192.168.43.110/retrieve_medicationProgress.php");
+
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);
 
-                String[] toReturn = null; int len =0;
+                int len =0;
                 inputstream = httpresponse.getEntity().getContent();
                 data = new byte[256];
                 stringbuffer = new StringBuffer();
@@ -149,22 +150,20 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                     stringbuffer.append(new String(data, 0, len));
                 }
                 inputstream.close();
-                String s = stringbuffer.toString();
-                JSONObject jsonObj = new JSONObject(s);
-                JSONArray record = jsonObj.getJSONArray("results");
-                ss = new String[record.length()];
-//                for(int i = 0; i< record.length(); i++)
-//                {
-                JSONObject c = record.getJSONObject(0);
-                Dtype = c.getString("drug_type");
-                Idate = c.getString("Initial_time");
-                Ddate = c.getString("due_time");
-//                }
+                String medication = stringbuffer.toString();
+                JSONObject jsonObject_Medication = new JSONObject(medication);
+                JSONArray record_Medication = jsonObject_Medication.getJSONArray("results");
 
+                JSONObject m = record_Medication.getJSONObject(0);
+                Dtype = m.getString("drug_type");
+                m = record_Medication.getJSONObject(1);
+                Idate = m.getString("initial_time");
+                m = record_Medication.getJSONObject(2);
+                Ddate = m.getString("due_time");
+                //endregion
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String[] re = Eresult.split(" ");
                         txtMedicationProgress.setText("Your medicine intake is "+ Dtype +" \nFirst Intake: "+ Idate +" \nSecond Intake: "+Ddate );
                     }
                 });
@@ -181,8 +180,6 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
         }
     }
 
-    String ID, EDate, Eresult;
-
     //Displaying Sputum Examination Result
     public class ExecuteTask3 extends AsyncTask{
 
@@ -191,15 +188,15 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
-            httppost = new HttpPost("http://10.0.2.2/retrieve_SputumExamResult.php");
             try{
+                //region Sputum Exam Result
+                httppost = new HttpPost("http://192.168.43.110/retrieve_SputumExamResult.php");
+
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);
 
-                String[] toReturn = null; int len =0;
+                int len =0;
                 inputstream = httpresponse.getEntity().getContent();
                 data = new byte[256];
                 stringbuffer = new StringBuffer();
@@ -207,23 +204,31 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                     stringbuffer.append(new String(data, 0, len));
                 }
                 inputstream.close();
-                String s = stringbuffer.toString();
-                JSONObject jsonObj = new JSONObject(s);
-                JSONArray record = jsonObj.getJSONArray("results");
-                ss = new String[record.length()];
-//                for(int i = 0; i< record.length(); i++)
-//                {
-                    JSONObject c = record.getJSONObject(0);
-                    ID = c.getString("ID");
-                    EDate = c.getString("Exam_date");
-                    Eresult = c.getString("Result");
-//                }
+                String sputumExam = stringbuffer.toString();
+                if(!sputumExam.equals("")) {
+                    JSONObject jsonObject_SputumExam = new JSONObject(sputumExam);
+                    JSONArray record_SputumExam = jsonObject_SputumExam.getJSONArray("results");
+
+                    JSONObject se = record_SputumExam.getJSONObject(0);
+                    ID = se.getString("ID");
+                    se = record_SputumExam.getJSONObject(1);
+                    EDate = se.getString("Exam_date");
+                    se = record_SputumExam.getJSONObject(2);
+                    Eresult = se.getString("Result");
+                }
+                //endregion
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String[] re = Eresult.split(" ");
-                        txtSputumResultAnalysis.setText("Date: "+ EDate +" \nAppereance: "+ re[0].toString() +" \nReading: "+re[1].toString()+" \nDiagnosis: "+re[2].toString() );
+
+                        if(!Eresult.equals("")) {
+                            String[] re = Eresult.split(" ");
+                            txtSputumResultAnalysis.setText("Date: " + EDate + " \nAppereance: " + re[0].toString() + " \nReading: " + re[1].toString() + " \nDiagnosis: " + re[2].toString());
+                        }
+                        else{
+                            txtSputumResultAnalysis.setText("No Sputum Examination");
+                        }
                     }
                 });
             }

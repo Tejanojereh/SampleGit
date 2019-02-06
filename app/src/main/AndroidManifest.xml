@@ -31,7 +31,7 @@
         <activity android:name=".Account_TBPartner"></activity>
         <activity android:name=".TreatmentDetails"></activity>
         <activity android:name=".Partner_Info"></activity>
-
+        <activity android:name=".MyPatients"></activity>
 
 
     </application>
