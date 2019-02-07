@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        Intent intent = new Intent(MainActivity.this, Account_TBPartner.class );
+        Intent intent = new Intent(MainActivity.this, ForgotPassword_tbpartner.class );
         switch (v.getId())
         {
             //sign in
@@ -145,6 +145,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Bundle bundle = new Bundle();
                             bundle.putString("id", uname);
                             intent.putExtras(bundle);
+                            txtPassword.setText(" ");
+                            txtUsername.setText(" ");
                             startActivity(intent);
 
                         }
