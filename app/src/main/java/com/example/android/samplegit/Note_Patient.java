@@ -89,7 +89,7 @@ public class Note_Patient extends AppCompatActivity {
 
             try {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.1.4/updatenotes.php");
+                httpPost = new HttpPost("http://192.168.43.17/updatenotes.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response = httpclient.execute(httpPost);
@@ -151,7 +151,7 @@ public class Note_Patient extends AppCompatActivity {
 
             try {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.1.4/retrieve_notes.php");
+                httpPost = new HttpPost("http://192.168.43.17/retrieve_notes.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response = httpclient.execute(httpPost);

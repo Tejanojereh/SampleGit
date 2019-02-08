@@ -158,7 +158,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
             Bundle bundle=getIntent().getExtras();
             nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("TP_ID", bundle.getString("id")));
-            httppost = new HttpPost("http://192.168.43.110/retrieveAssignedPatient.php");
+            httppost = new HttpPost("http://192.168.43.17/retrieveAssignedPatient.php");
             try {
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

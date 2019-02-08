@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageButton2:
             {
 
-                Toast.makeText(this, "Forgot Password", Toast.LENGTH_SHORT).show();
+
                 startActivity(intent);
 
             }break;
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-              httpPost = new HttpPost("http://192.168.1.4/login.php");
+              httpPost = new HttpPost("http://192.168.43.17/login.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
