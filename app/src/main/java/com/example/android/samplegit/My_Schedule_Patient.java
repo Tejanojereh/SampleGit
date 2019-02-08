@@ -38,7 +38,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 public class My_Schedule_Patient extends AppCompatActivity {
 
-    TextView appt_date;
+
     TextView med_date;
     TextView datenow;
     ImageButton addnote,back;
@@ -55,7 +55,6 @@ public class My_Schedule_Patient extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd ");
         DateFormat datefor= new SimpleDateFormat("HH:mm");
         Date date = new Date();
-        appt_date = findViewById(R.id.appointment_date);
         med_date = findViewById(R.id.medicine_date);
         datenow = findViewById(R.id.date);
         addnote = findViewById(R.id.addnote);

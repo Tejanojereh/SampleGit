@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-              httpPost = new HttpPost("http://192.168.43.110/login.php");
+              httpPost = new HttpPost("http://192.168.1.4/login.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
