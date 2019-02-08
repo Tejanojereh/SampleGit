@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import org.apache.http.HttpResponse;
@@ -32,7 +33,7 @@ import java.util.List;
 
 public class MyPatients extends AppCompatActivity {
 
-    Button[] btnPatients; RelativeLayout relativeLayout;
+    Button[] btnPatients; RelativeLayout relativeLayout; LinearLayout linearLayout;
 
     HttpClient httpclient; HttpResponse httpresponse; HttpPost httppost;
     StringBuffer stringbuffer = null; InputStream inputstream; BufferedReader bufferedreader;
@@ -92,17 +93,17 @@ public class MyPatients extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayoutID);
+                        linearLayout = (LinearLayout)findViewById(R.id.linearLayoutID);
                         btnPatients = new Button[patients.length];
 
                         for(int i=0; i<btnPatients.length; i++){
                             btnPatients[i] = new Button(context);
-                            btnPatients[i].setWidth(500);
-                            btnPatients[i].setHeight(500);
+                            btnPatients[i].setWidth(250);
+                            btnPatients[i].setHeight(250);
                             btnPatients[i].setText(patients[i].toString());
                             btnPatients[i].setTag(i);
                             btnPatients[i].setOnClickListener(new ButtonClicked(btnPatients[i], context));
-                            relativeLayout.addView(btnPatients[i]);
+                            linearLayout.addView(btnPatients[i]);
                         }
 
                     }

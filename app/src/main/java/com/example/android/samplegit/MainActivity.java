@@ -95,10 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 httpClient = new DefaultHttpClient();
 
-
-
-
-
               httpPost = new HttpPost("http://192.168.43.110/login.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
