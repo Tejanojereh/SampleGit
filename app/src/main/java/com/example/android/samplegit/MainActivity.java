@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-              httpPost = new HttpPost("http://192.168.43.17/login.php");
+              httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/login.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void run() {
 
                             Intent intent;
-                            if(uname.contains("TP") )
+                            if(uname.toUpperCase().contains("TP") )
                                 intent = new Intent(MainActivity.this, Menu_TBPartner.class);
 
                             else {

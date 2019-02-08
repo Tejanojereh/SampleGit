@@ -87,7 +87,7 @@ public class Partner_Info extends AppCompatActivity {
 
             try {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.43.17/retrieve_tp.php");
+                httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieve_tp.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response = httpclient.execute(httpPost);
