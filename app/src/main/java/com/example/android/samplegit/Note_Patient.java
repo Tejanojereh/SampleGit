@@ -31,6 +31,8 @@ public class Note_Patient extends AppCompatActivity {
     ImageButton back;
     String s,id;
     Bundle bundle1,bundle;
+    String notetext;
+    JSONObject c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +48,9 @@ public class Note_Patient extends AppCompatActivity {
                 new WebSer_Back().execute();
                 bundle1= getIntent().getExtras();
 
-                id= bundle1.getString("id");
 
-                bundle.putString("id",id);
+
+                bundle.putString("id",bundle1.getString("id"));
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -163,25 +165,34 @@ public class Note_Patient extends AppCompatActivity {
                     buffer.append(new String(data, 0, len));
 
 
+
                 }
-                String s = buffer.toString();
-                JSONObject jsonObj = new JSONObject(s);
-                JSONArray record = jsonObj.getJSONArray("results");
-                final JSONObject c = record.getJSONObject(0);
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
+                if(buffer.length()!=0) {
+                    String s = buffer.toString();
+                    JSONObject jsonObj = new JSONObject(s);
+                    JSONArray record = jsonObj.getJSONArray("results");
+                    c = record.getJSONObject(0);
 
 
-                        try {
-                           note.setText( c.getString("Notes").toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+
+                            try {
+
+                                    notetext = c.getString("Notes").toString();
+
+                                note.setText(notetext);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                });
+                    });
+                }
+
             } catch (final Exception e) {
                 runOnUiThread(new Runnable() {
                     @Override
