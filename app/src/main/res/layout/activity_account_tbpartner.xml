@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#98f4da">
+    android:background="#0A0B0A">
 
     <ImageView
         android:id="@+id/imageView10"
@@ -24,6 +24,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="145dp"
         android:text="First Name:"
+        android:textColor="@android:color/background_light"
         android:textSize="14sp" />
 
     <TextView
@@ -34,6 +35,7 @@
         android:layout_toEndOf="@+id/con"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
         android:textSize="14sp" />
 
     <TextView
@@ -43,6 +45,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/a1"
         android:layout_marginTop="189dp"
+        android:textColor="@android:color/background_light"
         android:text="Middle Name:" />
 
     <TextView
@@ -52,7 +55,9 @@
         android:layout_alignStart="@+id/firstname"
         android:layout_alignTop="@+id/textView5"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:textColor="@android:color/background_light"
+
+        />
 
     <TextView
         android:id="@+id/textView6"
@@ -61,16 +66,20 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/a1"
         android:layout_marginTop="228dp"
+        android:textColor="@android:color/background_light"
         android:text="Last Name:" />
 
     <TextView
         android:id="@+id/lastname"
         android:layout_width="181dp"
         android:layout_height="33dp"
+
         android:layout_alignStart="@+id/firstname"
         android:layout_alignTop="@+id/textView6"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:textColor="@android:color/background_light"
+
+       />
 
     <TextView
         android:id="@+id/con"
@@ -79,6 +88,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/a1"
         android:layout_marginBottom="217dp"
+        android:textColor="@android:color/background_light"
         android:text="Contact Number:" />
 
     <TextView
@@ -88,7 +98,9 @@
         android:layout_alignStart="@+id/firstname"
         android:layout_alignTop="@+id/con"
         android:ems="10"
-        android:inputType="textPersonName" />
+
+        android:textColor="@android:color/background_light"
+        />
 
     <TextView
         android:id="@+id/textView8"
@@ -97,6 +109,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/a1"
         android:layout_marginBottom="149dp"
+        android:textColor="@android:color/background_light"
         android:text="Username:" />
 
     <TextView
@@ -106,7 +119,8 @@
         android:layout_alignStart="@+id/firstname"
         android:layout_alignTop="@+id/textView8"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:textColor="@android:color/background_light"
+        />
 
 
     <ImageButton
@@ -114,8 +128,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/a1"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/btn_back" />
 

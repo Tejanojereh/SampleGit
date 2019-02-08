@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".Add_Sputum_Exam"></activity>
         <activity android:name=".My_Schedule_Patient"></activity>
-        <activity android:name=".My_Schedule_TBPartner"></activity>
         <activity android:name=".Menu_Patient"></activity>
         <activity android:name=".Note_Patient"></activity>
         <activity android:name=".Menu_TBPartner"></activity>
