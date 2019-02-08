@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        Intent intent = new Intent(MainActivity.this, Account_TBPartner.class );
+        Intent intent = new Intent(MainActivity.this, ForgotPassword_tbpartner.class );
         switch (v.getId())
         {
             //sign in
@@ -94,7 +94,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 httpClient = new DefaultHttpClient();
 
-              httpPost = new HttpPost("http://192.168.43.110/login.php");
+
+
+
+
+              httpPost = new HttpPost("http://192.168.43.17/login.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -141,6 +145,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Bundle bundle = new Bundle();
                             bundle.putString("id", uname);
                             intent.putExtras(bundle);
+                            txtPassword.setText(" ");
+                            txtUsername.setText(" ");
                             startActivity(intent);
 
                         }

@@ -84,7 +84,7 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                 int len =0;
 
                 //region Overall Progress
-                httppost = new HttpPost("http://192.168.43.110/getPatient_OverallProgress.php");
+                httppost = new HttpPost("http://192.168.43.17/getPatient_OverallProgress.php");
 
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
