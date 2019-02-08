@@ -64,7 +64,7 @@ public class MyPatients extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            httppost = new HttpPost("http://192.168.43.17/retrieveAssignedPatient.php");
+            httppost = new HttpPost("http://192.168.43.110/retrieveAssignedPatient.php");
             try {
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

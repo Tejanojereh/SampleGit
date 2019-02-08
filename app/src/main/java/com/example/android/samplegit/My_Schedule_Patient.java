@@ -125,7 +125,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
             try
             {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.43.17/retrieve_medication.php");
+                httpPost = new HttpPost("http://192.168.43.110/retrieve_medication.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
                 inputStream=response.getEntity().getContent();
