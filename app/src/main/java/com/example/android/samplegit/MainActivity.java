@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected Object doInBackground(Object[] objects) {
-//            progressDialog.show();
             byte data[];
             HttpPost httpPost;
             StringBuffer buffer = null;
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void run() {
 
                             Intent intent;
-                            if(uname.contains("TP"))
+                            if(uname.contains("TP") )
                                 intent = new Intent(MainActivity.this, Menu_TBPartner.class);
 
                             else {
@@ -152,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Incorrect username or password!", Toast.LENGTH_LONG).show();
                     }
                 });
             }
