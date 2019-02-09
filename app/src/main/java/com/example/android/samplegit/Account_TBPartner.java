@@ -60,13 +60,6 @@ public class Account_TBPartner extends AppCompatActivity {
 
         new WebService_TBPartner().execute();
 
-
-
-
-
-
-
-
     }
     public  class WebService_TBPartner extends AsyncTask
     {
