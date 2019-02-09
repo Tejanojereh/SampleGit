@@ -90,7 +90,6 @@ public class Note_Patient extends AppCompatActivity {
             try {
                 httpclient = new DefaultHttpClient();
                 httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/updatenotes.php");
-
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response = httpclient.execute(httpPost);
                 inputStream = response.getEntity().getContent();

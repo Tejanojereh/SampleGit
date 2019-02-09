@@ -6,12 +6,17 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.example.android.samplegit.R.drawable;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -41,6 +46,7 @@ public class MyPatients extends AppCompatActivity {
 
     String[] patients; byte[] data;
     Bundle bundle;
+    String id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +70,8 @@ public class MyPatients extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            httppost = new HttpPost("http://192.168.43.110/retrieveAssignedPatient.php");
+            //httppost = new HttpPost("http://192.168.43.110/retrieveAssignedPatient.php");
+            httppost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieveAssignedPatient.php");
             try {
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -103,8 +110,43 @@ public class MyPatients extends AppCompatActivity {
                             btnPatients[i].setText(patients[i].toString());
                             btnPatients[i].setTag(i);
                             btnPatients[i].setOnClickListener(new ButtonClicked(btnPatients[i], context));
+                            btnPatients[i].setBackground(ContextCompat.getDrawable(context, R.drawable.containter_1));
                             linearLayout.addView(btnPatients[i]);
                         }
+//                        <ImageButton
+//                        android:id="@+id/btn_back"
+//                        android:layout_width="wrap_content"
+//                        android:layout_height="wrap_content"
+//
+//                        android:layout_alignParentBottom="true"
+//                        android:layout_alignParentStart="true"
+//                        android:background="@android:color/transparent"
+//                        app:srcCompat="@drawable/btn_back" />
+
+//                        ImageButton img = new ImageButton(context);
+//                        img.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+//                        img.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//                        img.setBackground(ContextCompat.getDrawable(context, drawable.btn_back));
+//                        linearLayout.addView(img);
+//
+//                        img=findViewById(R.id.btn_back);
+//                        img.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                Intent intent = new Intent(MyPatients.this,Menu_Patient.class);
+//
+//                                bundle= getIntent().getExtras();
+//
+//                                id= bundle.getString("id");
+//
+//                                bundle.putString("id",id);
+//                                intent.putExtras(bundle);
+//                                startActivity(intent);
+//
+//
+//                            }
+//                        });
+
 
                     }
                 });

@@ -84,7 +84,7 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                 int len =0;
 
                 //region Overall Progress
-                httppost = new HttpPost("http://192.168.43.17/getPatient_OverallProgress.php");
+                httppost = new HttpPost("http://192.168.43.110/getPatient_OverallProgress.php");
 
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -136,8 +136,8 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
         protected Object doInBackground(Object[] objects) {
             try{
                 //region Medication Progress
-                httppost = new HttpPost("http://192.168.43.110/retrieve_medicationProgress.php");
-
+                //httppost = new HttpPost("http://192.168.43.110/retrieve_medicationProgress.php");
+                httppost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieve_medicationProgress.php");
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);

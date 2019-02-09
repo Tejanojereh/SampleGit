@@ -9,6 +9,7 @@
         android:id="@+id/linearLayoutID"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         android:orientation="vertical">
 
         <TextView
@@ -16,9 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="33dp"
+            android:background="#2E8B57"
             android:gravity="center_horizontal"
             android:text="My Patients"
             android:textAllCaps="true"
+            android:textColor="@android:color/white"
             android:textSize="21sp" />
 
         <Space
