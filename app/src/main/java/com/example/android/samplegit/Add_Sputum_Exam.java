@@ -200,7 +200,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
 
 
 
-            httppost = new HttpPost("http://192.168.43.110/insertSputumExam.php");
+            httppost = new HttpPost("http://tbcarephp.azurewebsites.net/insertSputumExam.php");
             try{
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);

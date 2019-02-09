@@ -58,7 +58,7 @@ public class TreatmentDetails extends AppCompatActivity {
         protected Object doInBackground(Object[] objects) {
             nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
-            httppost = new HttpPost("http://192.168.43.110/retrieve_medication.php");
+            httppost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieve_medication.php");
             try{
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -106,7 +106,7 @@ public class TreatmentDetails extends AppCompatActivity {
         protected Object doInBackground(Object[] objects) {
             nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("TB_Case_No", bundle.getString("id")));
-            httppost = new HttpPost("http://192.168.43.110/getPartner.php");
+            httppost = new HttpPost("http://tbcarephp.azurewebsites.net/getPartner.php");
             try{
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
