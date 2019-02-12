@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#50c878">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@android:color/black"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/background_dark"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/TextView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="33dp"
-            android:background="#2E8B57"
             android:gravity="center_horizontal"
-            android:text="Treatment Progress"
+            android:text="Treatment Details"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
             android:textSize="21sp" />
@@ -31,13 +30,13 @@
             android:layout_height="25dp" />
 
         <TextView
-            android:id="@+id/TxtOverallProgress"
+            android:id="@+id/TxtPatient"
             android:layout_width="fill_parent"
             android:layout_height="132dp"
             android:background="@drawable/containter_1"
             android:gravity="center"
-            android:text="TextView"
-            android:textColor="@android:color/white"
+            android:text="PATIENT:"
+            android:textColor="@android:color/black"
             android:textSize="20sp" />
 
         <Space
@@ -45,13 +44,13 @@
             android:layout_height="10dp" />
 
         <TextView
-            android:id="@+id/TxtMedicationProgress"
+            android:id="@+id/TxtMedication"
             android:layout_width="fill_parent"
             android:layout_height="132dp"
             android:background="@drawable/container_2"
             android:gravity="center"
-            android:text="TextView"
-            android:textColor="@android:color/white"
+            android:text="MEDICATION: "
+            android:textColor="@android:color/black"
             android:textSize="20sp" />
 
         <Space
@@ -59,34 +58,32 @@
             android:layout_height="10dp" />
 
         <TextView
-            android:id="@+id/TxtSputumResultAnalysis"
+            android:id="@+id/TxtTreatmentPartner"
             android:layout_width="fill_parent"
             android:layout_height="132dp"
             android:background="@drawable/container_3"
             android:gravity="center"
-            android:text="TextView"
-            android:textColor="@android:color/white"
+            android:text="TREATMENT PARTNER: "
+            android:textColor="@android:color/black"
             android:textSize="20sp" />
 
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-    </LinearLayout>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/btn_back" />
 
-    <ImageButton
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/btn_back" />
-
-    <!--<android.support.design.widget.NavigationView-->
+        <!--<android.support.design.widget.NavigationView-->
         <!--android:id="@+id/nav_view"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="match_parent"-->
         <!--android:layout_gravity="start"-->
         <!--android:fitsSystemWindows="true"-->
-        <!--app:menu="@menu/drawer_view"-->
-        <!--app:headerLayout="@layout/nav_header"/>-->
+        <!--app:menu="@menu/drawer_view" />-->
+
+    </LinearLayout>
 </RelativeLayout>

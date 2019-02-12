@@ -29,17 +29,16 @@ public class Note_Patient extends AppCompatActivity {
 
     EditText note;
     ImageButton back;
-    String s;
+    String s,id;
+    Bundle bundle1,bundle;
+    String notetext;
+    JSONObject c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
         note = (EditText) findViewById(R.id.txt_note);
         back = (ImageButton) findViewById(R.id.btn_back);
-        NotifyDialog dialog= new NotifyDialog();
-        dialog.show(getSupportFragmentManager(),"Medicine");
-
-
 
         //updates Patient_note table and returns to My Schedule view
         back.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +46,12 @@ public class Note_Patient extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Note_Patient.this, My_Schedule_Patient.class );
                 new WebSer_Back().execute();
+                bundle1= getIntent().getExtras();
+
+
+
+                bundle.putString("id",bundle1.getString("id"));
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -76,6 +81,7 @@ public class Note_Patient extends AppCompatActivity {
 
             Bundle bundle= getIntent().getExtras();
             id=bundle.getString("id");
+
             List<NameValuePair> nameValuePairs;
             nameValuePairs = new ArrayList<NameValuePair>(2);
             nameValuePairs.add(new BasicNameValuePair("ID", id));
@@ -83,8 +89,7 @@ public class Note_Patient extends AppCompatActivity {
 
             try {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/updatenotes.php");
-
+                httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/updatenotes.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response = httpclient.execute(httpPost);
                 inputStream = response.getEntity().getContent();
@@ -136,14 +141,16 @@ public class Note_Patient extends AppCompatActivity {
             HttpClient httpclient;
             InputStream inputStream;
             final String message;
+            Bundle bundle= getIntent().getExtras();
+
 
             List<NameValuePair> nameValuePairs;
             nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("ID", "TB000001"));
+            nameValuePairs.add(new BasicNameValuePair("ID",   bundle.getString("id")));
 
             try {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/retrieve_notes.php");
+                httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieve_notes.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response = httpclient.execute(httpPost);
@@ -157,25 +164,34 @@ public class Note_Patient extends AppCompatActivity {
                     buffer.append(new String(data, 0, len));
 
 
+
                 }
-                String s = buffer.toString();
-                JSONObject jsonObj = new JSONObject(s);
-                JSONArray record = jsonObj.getJSONArray("results");
-                final JSONObject c = record.getJSONObject(0);
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
+                if(buffer.length()!=0) {
+                    String s = buffer.toString();
+                    JSONObject jsonObj = new JSONObject(s);
+                    JSONArray record = jsonObj.getJSONArray("results");
+                    c = record.getJSONObject(0);
 
 
-                        try {
-                           note.setText( c.getString("notes").toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+
+                            try {
+
+                                    notetext = c.getString("Notes").toString();
+
+                                note.setText(notetext);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                });
+                    });
+                }
+
             } catch (final Exception e) {
                 runOnUiThread(new Runnable() {
                     @Override

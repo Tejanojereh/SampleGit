@@ -19,10 +19,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.Date;
-
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -43,15 +39,14 @@ public class Notify_Patient extends AppCompatActivity{
     Boolean linkCheck;
     String medication_date;
 
-    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    AlertDialog alertDialog = alertDialogBuilder.create();
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
 
-
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
         new WebService_Medication().execute();
 
@@ -78,7 +73,7 @@ public class Notify_Patient extends AppCompatActivity{
             try
             {
                 httpclient = new DefaultHttpClient();
-                httpPost = new HttpPost("http://192.168.137.1/retrieve_medication.php");
+                httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieve_medication.php");
 
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
@@ -97,8 +92,6 @@ public class Notify_Patient extends AppCompatActivity{
                 JSONObject jsonObj= new JSONObject(s);
                 JSONArray record = jsonObj.getJSONArray("results");
                 final JSONObject c = record.getJSONObject(0);
-                final Date currentTime= Calendar.getInstance().getTime();
-
                 runOnUiThread(new Runnable(){
 
                     @Override
@@ -109,9 +102,6 @@ public class Notify_Patient extends AppCompatActivity{
 
                             medication_date= c.getString("M_InitialTime");
 
-                            if(currentTime.toString()== medication_date) {
-                                alertDialog.setMessage(medication_date);
-                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

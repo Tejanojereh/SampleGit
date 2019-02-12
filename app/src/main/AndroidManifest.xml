@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>s
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,14 +22,15 @@
         </activity>
         <activity android:name=".Add_Sputum_Exam"></activity>
         <activity android:name=".My_Schedule_Patient"></activity>
-        <activity android:name=".My_Schedule_TBPartner"></activity>
         <activity android:name=".Menu_Patient"></activity>
         <activity android:name=".Note_Patient"></activity>
         <activity android:name=".Menu_TBPartner"></activity>
         <activity android:name=".View_and_Update_Medication_Progress"></activity>
         <activity android:name=".ForgotPassword_tbpartner"></activity>
         <activity android:name=".Account_TBPartner"></activity>
-
+        <activity android:name=".TreatmentDetails"></activity>
+        <activity android:name=".Partner_Info"></activity>
+        <activity android:name=".MyPatients"></activity>
 
 
     </application>

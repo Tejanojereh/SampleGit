@@ -8,14 +8,6 @@
     android:background="#0A0B0A">
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        app:srcCompat="@drawable/home_title"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <ImageView
         android:id="@+id/imageView5"
         android:layout_width="260dp"
         android:layout_height="131dp"
@@ -46,9 +38,4 @@
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="348dp" />
 
-    <FrameLayout
-
-        android:id="@+id/menu"
-        android:layout_width="169dp"
-        android:layout_height="match_parent"></FrameLayout>
 </RelativeLayout>

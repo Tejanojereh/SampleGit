@@ -1,6 +1,7 @@
 package com.example.android.samplegit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -34,6 +35,7 @@ import java.util.List;
 public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickListener{
 
     Button btnSubmit;
+    ImageButton back;
     Spinner spinnerVisualAppearance, spinnerReading, spinnerDiagnosis, spinnerPatient;
     ArrayAdapter <CharSequence> arrayAdapterVisualAppearance, arrayAdapterReading, arrayAdapterDiagnose, arrayAdapterPatient;
 
@@ -51,9 +53,16 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
         PopulateSpinner();
 
         btnSubmit.setOnClickListener(this);
+        back = (ImageButton) findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Add_Sputum_Exam.this, Menu_TBPartner.class );
+                startActivity(intent);
+            }
 
-//        Toast.makeText(this, spinnerVisualAppearance.getSelectedItem().toString() + " " + spinnerReading.getSelectedItem().toString() +" "+ spinnerDiagnosis.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
-//        Toast.makeText(this, DateFormat.getDateTimeInstance().format(new Date()).toString(), Toast.LENGTH_LONG).show();
+        });
+
 
     }
 
@@ -75,7 +84,7 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
     private void PopulateSpinner() {
         String[] VisualAppearance = {"Muco-purulent", "Blood-Stained", "Salivary"};
         String[] Reading = {"0", "+n", "1+", "2+", "3+"};
-        String[] Diagnosis = {"POSITIVE", "NEGATIVE"};
+        String[] Diagnosis = {"NEGATIVE", "POSITIVE"};
 
         arrayAdapterVisualAppearance = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, VisualAppearance);
         arrayAdapterVisualAppearance.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -89,17 +98,17 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
         arrayAdapterDiagnose.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerDiagnosis.setAdapter(arrayAdapterDiagnose);
 
+
+
         //TBPatient Spinner Populate
         new ExecuteTask(this).execute();
         return;
     }
     public String[] ReadResponse(String action) {
         try {
-//            String line ="";
             String[] toReturn = null; int len =0;
             inputstream = httpresponse.getEntity().getContent();
-            //toReturn = new String[inputstream.available()]; //get the length. do it before reading the stream
-            //bufferedreader = new BufferedReader(new InputStreamReader(inputstream));
+
             data = new byte[256];
             stringbuffer = new StringBuffer();
             while (-1 != (len = inputstream.read(data))) {
@@ -119,28 +128,10 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
                         JSONObject c = record.getJSONObject(i);
                         toReturn[i] = c.getString("TBCaseNo");
                     }
-//                    if(bufferedreader.ready()) {
-//                        while ((line = bufferedreader.readLine()) != null) {
-//                            toReturn[index] = line;
-//                            index++;
-//                        }
-//                    }
-//                    else
-//                    {
-//                        toReturn = new String[1];
-//                        toReturn[index] = "No Assigned Patient";
-//                    }
                 } break;
 
                 case "insert": {
                     toReturn = new String[]{stringbuffer.toString()};
-//                    Toast.makeText(this, stringbuffer.toString(), Toast.LENGTH_SHORT).show();
-//                    if(bufferedreader.ready()) {
-//                        while ((line = bufferedreader.readLine()) != null) {
-//                            toReturn[index] = line;
-//                            index++;
-//                        }
-//                    }
                 }break;
             }
             return toReturn;
@@ -164,9 +155,11 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
 
         @Override
         protected Object doInBackground(Object[] objects) {
+            Bundle bundle=getIntent().getExtras();
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TP_ID", "TP10989"));
-            httppost = new HttpPost("http://10.0.2.2/retrieveAssignedPatient.php");
+            nameValuePairs.add(new BasicNameValuePair("TP_ID", bundle.getString("id")));
+            //httppost = new HttpPost("http://192.168.43.110/retrieveAssignedPatient.php");
+            httppost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieveAssignedPatient.php");
             try {
                 httpclient = new DefaultHttpClient();
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -201,13 +194,13 @@ public class Add_Sputum_Exam extends AppCompatActivity implements View.OnClickLi
         protected Object doInBackground(Object[] objects) {
             String SE_Result = spinnerVisualAppearance.getSelectedItem().toString() + " " + spinnerReading.getSelectedItem().toString() +" "+ spinnerDiagnosis.getSelectedItem().toString();
             nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TBCaseNo", "TB10981"));
+            nameValuePairs.add(new BasicNameValuePair("TBCaseNo", spinnerPatient.getSelectedItem().toString()));
             nameValuePairs.add(new BasicNameValuePair("SE_Result", SE_Result));
             nameValuePairs.add(new BasicNameValuePair("SE_Date", DateFormat.getDateTimeInstance().format(new Date()).toString()));
 
 
 
-            httppost = new HttpPost("http://10.0.2.2/insertSputumExam.php");
+            httppost = new HttpPost("http://tbcarephp.azurewebsites.net/insertSputumExam.php");
             try{
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 httpresponse = httpclient.execute(httppost);
