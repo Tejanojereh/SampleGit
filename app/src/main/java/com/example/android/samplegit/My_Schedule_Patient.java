@@ -126,7 +126,7 @@ public class My_Schedule_Patient extends AppCompatActivity {
             {
                 httpclient = new DefaultHttpClient();
                 //httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieve_medication.php");
-                httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieve_medicaiton.php");
+                httpPost = new HttpPost("http://tbcarephp.azurewebsites.net/retrieve_medication.php");
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 response=httpclient.execute(httpPost);
                 inputStream=response.getEntity().getContent();

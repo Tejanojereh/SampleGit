@@ -30,7 +30,7 @@ public class Note_Patient extends AppCompatActivity {
     EditText note;
     ImageButton back;
     String s,id;
-    Bundle bundle1,bundle;
+    Bundle bundle1;
     String notetext;
     JSONObject c;
     @Override
@@ -44,15 +44,17 @@ public class Note_Patient extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Note_Patient.this, My_Schedule_Patient.class );
+                //Intent intent = new Intent(Note_Patient.this, My_Schedule_Patient.class );
+                //Toast.makeText(Note_Patient.this, "sample hi", Toast.LENGTH_LONG).show();
                 new WebSer_Back().execute();
-                bundle1= getIntent().getExtras();
+                Toast.makeText(Note_Patient.this, "sample hi", Toast.LENGTH_LONG).show();
+                /*bundle1= getIntent().getExtras();
 
 
 
                 bundle.putString("id",bundle1.getString("id"));
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivity(intent);*/
 
             }
 
@@ -106,6 +108,14 @@ public class Note_Patient extends AppCompatActivity {
                 runOnUiThread(new Runnable(){
                     public void run() {
                         Toast.makeText(Note_Patient.this, s, Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Note_Patient.this, My_Schedule_Patient.class );
+                        bundle1= getIntent().getExtras();
+                        Bundle bundle = new Bundle();
+
+
+                        bundle.putString("id",bundle1.getString("id"));
+                        intent.putExtras(bundle);
+                        startActivity(intent);
 
                     }
                 });
@@ -117,6 +127,7 @@ public class Note_Patient extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(Note_Patient.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
                     }
                 });
             }

@@ -50,6 +50,10 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(View_and_Update_Medication_Progress.this, Menu_Patient.class );
+                String id = bundle.getString("id");
+                Bundle b = new Bundle();
+                b.putString("id", id);
+                intent.putExtras(b);
                 startActivity(intent);
             }
 
@@ -111,7 +115,13 @@ public class View_and_Update_Medication_Progress extends AppCompatActivity imple
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        txtOverallProgress.setText( (30*6) - Integer.parseInt(tempStorage[0].toString()) + " days out of " + (30*6) + " days of treatment.");
+                        if(Integer.parseInt(tempStorage[0].toString()) > 180)
+                        {
+                            txtOverallProgress.setText("Treatment already exceeded the normal treatment duration");
+                        }else
+                        {
+                            txtOverallProgress.setText( (30*6) - Integer.parseInt(tempStorage[0].toString()) + " days out of " + (30*6) + " days of treatment.");
+                        }
                     }
                 });
             }

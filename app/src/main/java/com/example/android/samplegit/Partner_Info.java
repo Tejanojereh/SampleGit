@@ -31,7 +31,7 @@ public class Partner_Info extends AppCompatActivity {
     String id;
     String name;
     ImageButton back;
-    Bundle bundle,bundle1;
+    Bundle bundle1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,6 +49,7 @@ public class Partner_Info extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Partner_Info.this, Menu_Patient.class );
+                Bundle bundle = new Bundle();
                 bundle1= getIntent().getExtras();
 
                 id= bundle1.getString("id");
